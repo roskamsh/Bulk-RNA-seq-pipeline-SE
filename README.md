@@ -59,7 +59,7 @@ $ ctrl+z
 $ bg
 ```
 
-Clone the Omics-QC Pipeline into your working directory.
+Clone this Pipeline into your working directory.
 
 ```
 $ git clone https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline.git

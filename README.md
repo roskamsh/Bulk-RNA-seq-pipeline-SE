@@ -62,7 +62,7 @@ $ bg
 Clone this Pipeline into your working directory.
 
 ```
-$ git clone https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline.git
+$ git clone https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE.git
 ```
 
 Create a `samples/raw` directory, a `logs` directory and a `data` directory (if they do not exist) in your `wdir()`.

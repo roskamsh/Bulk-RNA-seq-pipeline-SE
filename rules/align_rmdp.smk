@@ -22,7 +22,7 @@ rule fastqc:
     log:
         "logs/fastqc/{sample}_fastqc.log"
     conda:
-        "../envs/omic_qc_wf.yaml"
+        "../envs/fastqc.yaml"
     message:
         """--- Quality check of raw data with Fastqc."""
     shell:
@@ -30,21 +30,17 @@ rule fastqc:
 
 rule fastqscreen:
     input:
-        fwd = "samples/trimmed/{sample}_R1_t.fq",
-        rev = "samples/trimmed/{sample}_R2_t.fq"
+        "samples/trimmed/{sample}_t.fq"
     output:
-        "samples/fastqscreen/{sample}/{sample}_R1_t_screen.html",
-        "samples/fastqscreen/{sample}/{sample}_R1_t_screen.png",
-        "samples/fastqscreen/{sample}/{sample}_R1_t_screen.txt",
-        "samples/fastqscreen/{sample}/{sample}_R2_t_screen.html",
-        "samples/fastqscreen/{sample}/{sample}_R2_t_screen.png",
-        "samples/fastqscreen/{sample}/{sample}_R2_t_screen.txt"
+        "samples/fastqscreen/{sample}/{sample}_t_screen.html",
+        "samples/fastqscreen/{sample}/{sample}_t_screen.png",
+        "samples/fastqscreen/{sample}/{sample}_t_screen.txt"
     params:
         conf = config["conf"]
     conda:
         "../envs/fastqscreen.yaml"
     shell:
-        """fastq_screen --aligner bowtie2 --conf {params.conf} --outdir samples/fastqscreen/{wildcards.sample} {input.fwd} {input.rev}"""
+        """fastq_screen --aligner bowtie2 --conf {params.conf} --outdir samples/fastqscreen/{wildcards.sample} {input}"""
 
 rule STAR:
     input:

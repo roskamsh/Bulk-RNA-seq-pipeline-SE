@@ -1,25 +1,15 @@
 omic_meta_data:
-  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/PP_cohort_sample_info_log_JE.2018.09.28.txt
+   /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE/data/RNAseq_metadata_JK.txt
 base_dir:
-  /home/groups/CEDAR/roskamsh/projects/Omics-QC-pipeline
+  /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE
 gtf_file:
   /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.v27.annotation.gtf
 bed_file:
   /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/gencode_v27.bed
 exon_gtf:
   /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.housekeeping_genes.exon.gtf
-adapter-PE:
-  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/TruSeq2-PE.fa
 adapter-SE:
   /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/TruSeq2-SE.fa
-anno-hg19:
-  /home/groups/CEDAR/anno/biomaRt/hg19.Ens_75.biomaRt.GO.geneID2GO.RData
-anno-hg38.89:
-  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_89.biomaRt.GO.geneID2GO.RData
-anno-hg38.90:
-  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.GO.geneID2GO.RData
-GO_Term_list:
-  /home/groups/CEDAR/anno/biomaRt/GO.db.Term.list.rda
 conf:
   /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
 #path to tools
@@ -36,7 +26,7 @@ refflat2:
 star_index:
   /home/exacloud/lustre1/CEDAR/anurpa/genomes/
 project_id:
-  Bulk-RNA-seq_12_11
+  JK_Bulk
 assembly:
   hg38.90
 baseline:
@@ -44,7 +34,7 @@ baseline:
 linear_model:
   Type
 seq_layout:
-  PE
+  SE
 sample_id:
   StudyID
 dds_design:
@@ -69,4 +59,4 @@ pca:
     # columns of sample sheet to use for PCA
     - Type
 # path or URL to sample sheet (TSV format, columns: sample, condition, ...)
-samples: /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/PP_cohort_sample_info_log_JE.2018.09.28.txt
+samples: /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE/data/RNAseq_metadata_JK.txt

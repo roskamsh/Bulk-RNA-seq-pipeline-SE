@@ -79,7 +79,7 @@ Symbollically link the fastq files of your samples to the `wdir/samples/raw` dir
 
 ```
 $ ls -1 /path/to/data/LIB*fastq | while read fastq; do 
-  R=$( basename $fastq | cut -d '_' -f 2 | awk '{print $1".fastq"}' )
+  R=$( basename $fastq | cut -d '_' -f 2 | awk '{print $1".fq"}' )
   echo $R
   ln -s $fastq ./$R
 done

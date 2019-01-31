@@ -6,29 +6,12 @@ rule insertion_profile:
         seq_layout=config['seq_layout'],
     output:
         "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.r",
-        "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.R1.pdf",
-        "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.R2.pdf",
+        "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.pdf",
         "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.xls",
     conda:
         "../envs/rseqc.yaml"
     shell:
         "insertion_profile.py -s '{params.seq_layout}' -i {input} -o rseqc/insertion_profile/{wildcards.sample}/{wildcards.sample}"
-
-
-rule inner_distance:
-    input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    params:
-        bed=config['bed_file']
-    output:
-        "rseqc/inner_distance/{sample}/{sample}.inner_distance.txt",
-        "rseqc/inner_distance/{sample}/{sample}.inner_distance_plot.r",
-        "rseqc/inner_distance/{sample}/{sample}.inner_distance_plot.pdf",
-        "rseqc/inner_distance/{sample}/{sample}.inner_distance_freq.txt",
-    conda:
-        "../envs/rseqc.yaml"
-    shell:
-        "inner_distance.py -i {input} -o rseqc/inner_distance/{wildcards.sample}/{wildcards.sample} -r {params.bed}"
 
 
 rule clipping_profile:
@@ -38,8 +21,7 @@ rule clipping_profile:
         seq_layout=config['seq_layout'],
     output:
         "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.r",
-        "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.R1.pdf",
-        "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.R2.pdf",
+        "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.pdf",
         "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.xls",
     conda:
         "../envs/rseqc.yaml"

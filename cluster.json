@@ -84,16 +84,16 @@
     "STAR" :
     {
         "J" : "star",
-        "e" : "logs/star%j.err",
-        "o" : "logs/star%j.out",
+        "e" : "logs/star/star%j.err",
+        "o" : "logs/star/star%j.out",
         "c" : 12,
         "mem" : 64000
     },
     "index" :
     {
         "J" : "index",
-        "e" : "logs/index%j.err",
-        "o" : "logs/index%j.out",
+        "e" : "logs/index/index%j.err",
+        "o" : "logs/index/index%j.out",
         "c" : 1,
         "mem" : 45000
     },

@@ -78,8 +78,10 @@ $ mkdir raw
 Symbollically link the fastq files of your samples to the `wdir/samples/raw` directory using a bash script loop in your terminal.
 
 ```
-$ ls -1 /path/to/data/LIB*fastq | while read fastq; do 
-  ln -s $fastq ./$( basename $fastq | cut -d ‘_’ -f 2 | awk ‘{print $1".fq”}’ );
+ls -1 /path/to/data/LIB*fastq |     while read fastq; do
+  R=$( basename $fastq | cut -d '_' -f 2 | awk '{print $1".fq"}' )
+  echo $R
+  ln -s ${fastq} ./${R}
 done
 ```
 

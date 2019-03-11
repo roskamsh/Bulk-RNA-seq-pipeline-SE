@@ -1,62 +1,88 @@
+##########################################
+# Important project-specific paths/files
+##########################################
+
+# Metadata needed for differential expression analysis
 omic_meta_data:
-   /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE/data/RNAseq_metadata_JK.txt
+  /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE/data/RNAseq_metadata_JK.txt
+# Path to your base directory (path to this directory)
 base_dir:
-  /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE
+  /path/to/base/directory
+
+##############################################################################
+# Genome and project-specific files that will change from project-to-project
+##############################################################################
+
+# GTF file for the genome build you would like to use
 gtf_file:
   /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.v27.annotation.gtf
+# Bed file for rseqc function read_distribution
 bed_file:
   /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/gencode_v27.bed
-exon_gtf:
-  /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.housekeeping_genes.exon.gtf
-adapter-SE:
-  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/TruSeq2-SE.fa
-conf:
-  /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
-#path to tools
-star_tool:
-  /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
-picard_tool:
-  /home/exacloud/lustre1/CEDAR/tools/picard-tools-1.119/MarkDuplicates.jar
-bamstats_tool:
-  /home/groups/CEDAR/roskamsh/tools/bamstats_bin/bamstats
-genome:
-  /home/exacloud/lustre1/CEDAR/anurpa/genomes/GRCh38.primary_assembly.genome.fa
-refflat2:
-  /home/exacloud/lustre1/CEDAR/Genomes/gencode27_refflat2.txt
+# Pre-built star indexes for hg38
 star_index:
   /home/exacloud/lustre1/CEDAR/anurpa/genomes/
+
+####################################################################
+# Tool-specific files that will not change from project-to-project
+####################################################################
+
+# Fasta file including the illumina adapters to be trimmed out via Trimmomatic
+adapter:
+  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/TruSeq2-SE.fa
+# Pre-built genome indexes for various organisms which we will screen against to look for contamination
+conf:
+  /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
+# Paths to various tools which are used in this pipeline
+star_tool:
+  /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+
+##########################################
+# Important project-specific paths/files
+##########################################
+
+# Metadata needed for differential expression analysis
+omic_meta_data:
+  /path/to/metadata/file
+# Path to your base directory (path to this directory)
+base_dir:
+  /path/to/base/directory
+
+##############################################################################################
+# Project-specific specifications you will need to make prior to submission of the pipeline
+##############################################################################################
+
+# Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
   JK_Bulk
+# Genome assembly used for GO analysis, format must be as below, with the genome assembly first, and the version of ensembl second, separated by a period.
 assembly:
   hg38.90
+# The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
 baseline:
   HD
+# The column name of the characteristic you would like to do DE on. Example: Diagnosis, genotype, etc. This must be a column in your omic_meta_data.
 linear_model:
   Type
-seq_layout:
-  SE
+# The column name in which your sampleIDs are defined in omic_meta_data. These should match the sampleIDs in your fastq files.
 sample_id:
   StudyID
-dds_design:
-  SampleID
-rseqc_env:
-  source activate rseqc-omic-wf
+# The column names in your omic_meta_data file which you would like to annotate your heatmaps by. This is used as a QC to look for batch effects. Enter columns which could potentially introduce a batch effect in your data.
 meta_columns_to_plot:
   Type: Type
   Notes: Notes
   RNA_extraction_date: RNA_extraction_date
+# Contrasts which you would like to run differential expression on.
+# For example if you want to look at wild type (wt) vs. mutant (mut), you would specify mut-vs-wt
+# It is important that when listing your types here, you write your baseline SECOND
 diffexp:
   # contrasts for the deseq2 results method
   contrasts:
-    #HD-vs-MM:
-    #  - HD
-    #  - MM
-    HD-vs-LCx:
-      - HD
+    LCx-vs-HD:
       - LCx
+      - HD
+# The column name in your omic_meta_data file to colour your PCA plot by
 pca:
   labels:
-    # columns of sample sheet to use for PCA
+  # columns of sample sheet to use for PCA
     - Type
-# path or URL to sample sheet (TSV format, columns: sample, condition, ...)
-samples: /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE/data/RNAseq_metadata_JK.txt

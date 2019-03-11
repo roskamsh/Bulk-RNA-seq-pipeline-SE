@@ -4,7 +4,7 @@
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /home/groups/CEDAR/roskamsh/projects/Bulk-RNA-seq-pipeline-SE/data/RNAseq_metadata_JK.txt
+  /path/to/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
   /path/to/base/directory

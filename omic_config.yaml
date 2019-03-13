@@ -1,14 +1,3 @@
-##########################################
-# Important project-specific paths/files
-##########################################
-
-# Metadata needed for differential expression analysis
-omic_meta_data:
-  /path/to/metadata.txt
-# Path to your base directory (path to this directory)
-base_dir:
-  /path/to/base/directory
-
 ##############################################################################
 # Genome and project-specific files that will change from project-to-project
 ##############################################################################
@@ -43,14 +32,14 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /path/to/metadata/file
+  /path/to/metadata
 # Path to your base directory (path to this directory)
 base_dir:
   /path/to/base/directory
 
-##############################################################################################
+#############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
-##############################################################################################
+#############################################################################################
 
 # Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
@@ -60,27 +49,40 @@ assembly:
   hg38.90
 # The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
 baseline:
-  HD
+  Day0_NI
 # The column name of the characteristic you would like to do DE on. Example: Diagnosis, genotype, etc. This must be a column in your omic_meta_data.
 linear_model:
   Type
 # The column name in which your sampleIDs are defined in omic_meta_data. These should match the sampleIDs in your fastq files.
 sample_id:
-  StudyID
+  SampleID
 # The column names in your omic_meta_data file which you would like to annotate your heatmaps by. This is used as a QC to look for batch effects. Enter columns which could potentially introduce a batch effect in your data.
 meta_columns_to_plot:
   Type: Type
-  Notes: Notes
-  RNA_extraction_date: RNA_extraction_date
+  Gender: Gender
+  RNA_isolation_date: RNA_isolation_date
+  culture_media: culture_media
 # Contrasts which you would like to run differential expression on.
 # For example if you want to look at wild type (wt) vs. mutant (mut), you would specify mut-vs-wt
 # It is important that when listing your types here, you write your baseline SECOND
 diffexp:
   # contrasts for the deseq2 results method
   contrasts:
-    LCx-vs-HD:
-      - LCx
-      - HD
+    Day00_I-vs-Day00_NI:
+      - Day00_I
+      - Day00_NI
+    Day07_I-vs-Day00_NI:
+      - Day07_I
+      - Day00_NI
+    Day14_I-vs-Day00_NI:
+      - Day14_I
+      - Day00_NI
+    Day21_I-vs-Day00_NI:
+      - Day21_I
+      - Day00_NI
+    Day28_I-vs-Day00_NI:
+      - Day28_I
+      - Day00_NI
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:
   labels:

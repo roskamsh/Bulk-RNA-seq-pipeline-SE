@@ -2,8 +2,6 @@
 rule insertion_profile:
     input:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    params:
-        seq_layout=config['seq_layout'],
     output:
         "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.r",
         "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.pdf",
@@ -11,14 +9,12 @@ rule insertion_profile:
     conda:
         "../envs/rseqc.yaml"
     shell:
-        "insertion_profile.py -s '{params.seq_layout}' -i {input} -o rseqc/insertion_profile/{wildcards.sample}/{wildcards.sample}"
+        "insertion_profile.py -s SE -i {input} -o rseqc/insertion_profile/{wildcards.sample}/{wildcards.sample}"
 
 
 rule clipping_profile:
     input:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    params:
-        seq_layout=config['seq_layout'],
     output:
         "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.r",
         "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.pdf",
@@ -26,7 +22,7 @@ rule clipping_profile:
     conda:
         "../envs/rseqc.yaml"
     shell:
-        "clipping_profile.py -i {input} -s '{params.seq_layout}' -o rseqc/clipping_profile/{wildcards.sample}/{wildcards.sample}"
+        "clipping_profile.py -i {input} -s SE -o rseqc/clipping_profile/{wildcards.sample}/{wildcards.sample}"
 
 
 rule read_distribution:

@@ -51,14 +51,6 @@ Check md5sum again to ensure your sequencing files are not corrupted.
 $ md5sum –c md5sum.txt > md5sum_out.txt
 ```
 
-Unzip all fastq files.
-
-```
-$ gunzip –d sample.fastq.gz
-$ ctrl+z
-$ bg
-```
-
 Clone this Pipeline into your working directory.
 
 ```

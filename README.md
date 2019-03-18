@@ -205,5 +205,5 @@ Differential Expression Analysis (DESeq2)
 
 Directed Acyclic Graph (DAG) of an example workflow including two samples
 ======================
-![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/tree/master/data)
+![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/tree/master/data/dag.svg)
 

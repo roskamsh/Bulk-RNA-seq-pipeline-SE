@@ -57,11 +57,10 @@ Clone this Pipeline into your working directory.
 $ git clone https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE.git
 ```
 
-Create a `samples/raw` directory, a `logs` directory and a `data` directory (if they do not exist) in your `wdir()`.
+Create a `samples/raw` directory, and a `logs` directory in your `wdir()`.
 
 ```
 $ mkdir logs
-$ mkdir data
 $ mkdir samples
 $ cd samples
 $ mkdir raw
@@ -205,5 +204,5 @@ Differential Expression Analysis (DESeq2)
 
 Directed Acyclic Graph (DAG) of an example workflow including two samples
 ======================
-![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/blob/master/data/Screen%20Shot%202019-03-18%20at%201.15.38%20PM.png)
+![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/blob/master/data/dag.png)
 

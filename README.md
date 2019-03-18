@@ -202,3 +202,8 @@ Differential Expression Analysis (DESeq2)
         * Volcano plots:
             * A `volcano plot` describing the distribution of up/downregulated genes in a given comparison
                 * Output is located in `results/diffexp`
+
+Directed Acyclic Graph (DAG) of an example workflow including two samples
+======================
+![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/tree/master/data)
+

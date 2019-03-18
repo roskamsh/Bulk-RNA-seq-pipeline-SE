@@ -138,7 +138,6 @@ Quality Analysis / Quality Check
 1) RSEQC Quality check 
     * `RSEQC` was used to check the quality of the reads by using a collection of commands from the `RSEQC` package:
         * Insertion Profile
-        * Inner Distance
         * Clipping Profile
         * Read distribution
         * Read GC
@@ -192,6 +191,8 @@ Differential Expression Analysis (DESeq2)
             * The output is placed in `results/diffexp/{contrast}.diffexp.tsv`
         * *MA Plots* are generated for each contrast
         * *p-histograms* are generated for each contrast
+    * Permutation test to determine the robustness of your differentially regulated genes for each comparison
+        * Output directory: `results/diffexp/permutationTest`
 4) Differential Expression Plots
     * We use the output from DESeq2 to generate two types of plots:
         * Gene Ontology (GO) plots:

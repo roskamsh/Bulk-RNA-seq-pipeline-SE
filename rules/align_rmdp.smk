@@ -1,22 +1,22 @@
 rule trimming:
     input:
-        "samples/raw/{sample}.fq"
+        "samples/raw/{sample}.fastq.gz"
     output:
-        "samples/trimmed/{sample}_t.fq"
+        "samples/trimmed/{sample}_t.fastq"
     log:
         "logs/trimming/{sample}_trimming.log"
     params:
-        adapter = config["adapter-SE"]
+        adapter = config["adapter"]
     conda:
         "../envs/trim.yaml"
     message:
         """--- Trimming."""
     shell:
-        """trimmomatic SE -phred33 {input} {output} ILLUMINACLIP:{params.adapter}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36"""
+        """trimmomatic SE -phred33 {input} {output} ILLUMINACLIP:{params.adapter}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50"""
 
 rule fastqc:
     input:
-        "samples/trimmed/{sample}_t.fq"
+        "samples/trimmed/{sample}_t.fastq"
     output:
         "samples/fastqc/{sample}/{sample}_t_fastqc.zip"
     log:
@@ -30,7 +30,7 @@ rule fastqc:
 
 rule fastqscreen:
     input:
-        "samples/trimmed/{sample}_t.fq"
+        "samples/trimmed/{sample}_t.fastq"
     output:
         "samples/fastqscreen/{sample}/{sample}_t_screen.html",
         "samples/fastqscreen/{sample}/{sample}_t_screen.png",
@@ -44,7 +44,7 @@ rule fastqscreen:
 
 rule STAR:
     input:
-        "samples/trimmed/{sample}_t.fq"
+        "samples/trimmed/{sample}_t.fastq"
     output:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam",
         "samples/star/{sample}_bam/ReadsPerGene.out.tab",
@@ -87,25 +87,6 @@ rule star_statistics:
     script:
         "../scripts/compile_star_log.py"
 
-rule bam_statistics:
-    input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    output:
-        "samples/bamstats/{sample}/genome_coverage.json"
-    run:
-        bamstats=config["bamstats_tool"]
-        gtf = config["gtf_file"]
-
-        shell("{bamstats} -a {gtf} -i {input} -o {output} -u")
-
-rule get_bam_coverage:
-    input:
-        expand("samples/bamstats/{sample}/genome_coverage.json", sample=SAMPLES)
-    output:
-        "data/{project_id}_coverage.txt".format(project_id=config["project_id"])
-    script:
-        "../scripts/get_coverage.py"
-
 rule genecount:
     input:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
@@ -125,27 +106,9 @@ rule genecount:
                 -f bam \
                 -r name \
                 -s reverse \
-                -m union \
+                -m intersection-strict \
                 {input} \
                 {params.gtf} > {output}"""
-
-rule count_exons:
-    input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    output:
-        "samples/htseq_exon_count/{sample}_htseq_exon_count.txt"
-    params:
-        exon_gtf = config["exon_gtf"]
-    conda:
-        "../envs/omic_qc_wf.yaml"
-    shell:
-        """htseq-count \
-                -f bam \
-                -m intersection-nonempty \
-                -i exon_id \
-                --additional-attr=gene_name \
-                {input} \
-                {params.exon_gtf} > {output}"""
 
 rule compile_counts:
     input:
@@ -163,15 +126,4 @@ rule compile_counts_and_stats:
         "data/{project_id}_counts_w_stats.txt".format(project_id=config["project_id"])
     script:
         "../scripts/compile_counts_table_w_stats.py"
-
-
-rule compile_exon_counts:
-    input:
-        expand("samples/htseq_exon_count/{sample}_htseq_exon_count.txt", sample=SAMPLES)
-    output:
-        "data/{project_id}_exon_counts.txt".format(project_id = config["project_id"])
-    conda:
-        "../envs/junction_counts.yaml"
-    script:
-        "../scripts/compile_exon_counts.R"
 

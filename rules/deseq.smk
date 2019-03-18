@@ -8,7 +8,7 @@ rule deseq2_init:
         normed_counts="results/tables/{project_id}_normed_counts.txt".format(project_id = project_id),
         rld_out = "results/diffexp/{project_id}_rlog_dds.rds".format(project_id = project_id),
     params:
-        samples=config["samples"],
+        samples=config["omic_meta_data"],
         design=config["pca"]["labels"],
         row_names=config["sample_id"],
     conda:
@@ -24,7 +24,6 @@ rule deseq2_plots:
     input:
         rds_object = "results/diffexp/{project_id}_rlog_dds.rds".format(project_id = project_id),
         dds_object = "results/diffexp/{project_id}_all.rds".format(project_id = project_id),
-
     output:
         pca="results/diffexp/pca.pdf",
         sd_mean_plot="results/diffexp/sd_mean_plot.pdf",
@@ -86,4 +85,21 @@ rule volcano:
     params:
        contrast = get_contrast
     shell: """Rscript scripts/RNAseq_makeVolcano.R --degFile={input} --adjp=0.01 --FC=2"""
+
+rule permutation:
+    input:
+        counts = "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+    output:
+        numGenes = "results/diffexp/permutationTest/{contrast}.number.diff.genes.csv",
+        permList = "results/diffexp/permutationTest/{contrast}.permutation.list.csv",
+        histogram = "results/diffexp/permutationTest/Histogram.{contrast}.Permutation.Test.pdf"
+    params:
+        contrast = get_contrast,
+        samples = config["omic_meta_data"],
+        sample_id = config["sample_id"],
+        linear_model = config["linear_model"]
+    conda:
+        "../envs/permutation.yaml"
+    script:
+        "../scripts/permutation_test.R"
 

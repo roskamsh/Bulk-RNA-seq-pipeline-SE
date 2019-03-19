@@ -57,11 +57,10 @@ Clone this Pipeline into your working directory.
 $ git clone https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE.git
 ```
 
-Create a `samples/raw` directory, a `logs` directory and a `data` directory (if they do not exist) in your `wdir()`.
+Create a `samples/raw` directory, and a `logs` directory in your `wdir()`.
 
 ```
 $ mkdir logs
-$ mkdir data
 $ mkdir samples
 $ cd samples
 $ mkdir raw
@@ -139,7 +138,6 @@ Quality Analysis / Quality Check
 1) RSEQC Quality check 
     * `RSEQC` was used to check the quality of the reads by using a collection of commands from the `RSEQC` package:
         * Insertion Profile
-        * Inner Distance
         * Clipping Profile
         * Read distribution
         * Read GC
@@ -193,6 +191,8 @@ Differential Expression Analysis (DESeq2)
             * The output is placed in `results/diffexp/{contrast}.diffexp.tsv`
         * *MA Plots* are generated for each contrast
         * *p-histograms* are generated for each contrast
+    * Permutation test to determine the robustness of your differentially regulated genes for each comparison
+        * Output directory: `results/diffexp/permutationTest`
 4) Differential Expression Plots
     * We use the output from DESeq2 to generate two types of plots:
         * Gene Ontology (GO) plots:
@@ -205,5 +205,5 @@ Differential Expression Analysis (DESeq2)
 
 Directed Acyclic Graph (DAG) of an example workflow including two samples
 ======================
-![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/blob/master/data/Screen%20Shot%202019-03-18%20at%201.15.38%20PM.png)
+![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/blob/master/data/dag.png)
 

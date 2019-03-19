@@ -36,9 +36,9 @@
     },
     "STAR" :
     {
-        "J" : "star",
-        "e" : "logs/star/star%j.err",
-        "o" : "logs/star/star%j.out",
+        "J" : "STAR",
+        "e" : "logs/STAR/STAR%j.err",
+        "o" : "logs/STAR/STAR%j.out",
         "c" : 12,
         "mem" : 64000
     },

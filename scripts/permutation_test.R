@@ -23,13 +23,18 @@ baseline <- contrast[[1]]
 target <- contrast[[2]]
 
 md <- read.delim(file=metadata, sep = "\t", stringsAsFactors = FALSE)
+md <- md[with(md, order(SampleID)),]
+
+# Read in counts table
+subdata <- read.table(counts, header=TRUE, row.names=1, sep="\t")
+subdata <- subdata[,order(colnames(subdata))]
+
+# Check
+stopifnot(md[[sampleID]]==colnames(subdata))
 
 # Extract only the Types that we want in further analysis & only the PP_ID and Status informative columns
 md <- select(md, sampleID, Type)
 md <- filter(md, !!as.name(Type) == baseline | !!as.name(Type) == target)
-
-# Read in counts table
-subdata <- read.table(counts, header=TRUE, row.names=1, sep="\t")
 
 # Keep only the PP_IDs of the types we have chosen in the metadata table above
 rownames(md) <- md[[sampleID]]
@@ -88,6 +93,8 @@ for (i in 1:number_of_try)
 dds <- DESeqDataSetFromMatrix(countData=subdata,
                               colData=md,
                               design= as.formula(paste('~',Type)))
+
+dds <- estimateSizeFactors(dds)
 
 # Remove uninformative columns
 dds <- dds[ rowSums(counts(dds)) >= 1, ]

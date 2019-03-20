@@ -610,7 +610,7 @@ print("Read in Abundance data")
 
 
 filt_pattern = str_replace_all(readpattern,'[.*]','')
-tep_mat = as.matrix(read.table("../{dataset}",check.names=F))
+tep_mat = as.matrix(read.table("../{dataset}",check.names=F,row.names=1,header=T))
 filt_dt = data.table(tep_mat,check.names=F)
 samps = sort(grep(filt_pattern, names(filt_dt),value=T))
 samp.labels = samps

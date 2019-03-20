@@ -12,9 +12,6 @@ cat(sprintf('Setting parameters'))
 rds <- snakemake@input[['rds_object']]
 cat(sprintf(c('RDS: ',rds)))
 
-dds <- snakemake@input[['dds_object']]
-cat(sprintf(c('DDS: ',rds)))
-
 pca_plot <- snakemake@output[['pca']]
 cat(sprintf(c('PCA plot: ',pca_plot)))
 

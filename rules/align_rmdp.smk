@@ -87,43 +87,13 @@ rule star_statistics:
     script:
         "../scripts/compile_star_log.py"
 
-rule genecount:
+rule compile_star_counts:
     input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    output:
-        "samples/htseq_count/{sample}_htseq_gene_count.txt",
-    log:
-        "logs/genecount/{sample}_genecount.log"
+        expand("samples/star/{sample}_bam/ReadsPerGene.out.tab",sample=SAMPLES)
     params:
-        name = "genecount_{sample}",
-        gtf = config["gtf_file"]
-    conda:
-        "../envs/omic_qc_wf.yaml"
-    threads: 1
-    shell:
-        """
-          htseq-count \
-                -f bam \
-                -r name \
-                -s reverse \
-                -m intersection-strict \
-                {input} \
-                {params.gtf} > {output}"""
-
-rule compile_counts:
-    input:
-        expand("samples/htseq_count/{sample}_htseq_gene_count.txt",sample=SAMPLES)
+        samples=SAMPLES
     output:
         "data/{project_id}_counts.txt".format(project_id=config["project_id"])
     script:
-        "../scripts/compile_counts_table.py"
-
-
-rule compile_counts_and_stats:
-    input:
-        expand("samples/htseq_count/{sample}_htseq_gene_count.txt",sample=SAMPLES)
-    output:
-        "data/{project_id}_counts_w_stats.txt".format(project_id=config["project_id"])
-    script:
-        "../scripts/compile_counts_table_w_stats.py"
+        "../scripts/compile_star_counts.py"
 

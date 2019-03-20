@@ -58,29 +58,13 @@
         "c" : 1,
         "mem":5000
     },
-    "genecount" :
+    "compile_star_counts" :
     {
-        "J" : "genecount",
-        "e" : "logs/genecount/genecount_%j.err",
-        "o" : "logs/genecount/genecount_%j.out",
+        "J" : "compile_star_counts",
+        "e" : "logs/compile_star_counts/compile_star_counts_%j.err",
+        "o" : "logs/compile_star_counts/compile_star_counts_%j.out",
         "c" : 1,
-        "mem" : 54000
-    },
-    "compile_counts" :
-    {
-        "J" : "compile_counts",
-        "e" : "logs/compile_counts/compile_counts_%j.err",
-        "o" : "logs/compile_counts/compile_counts_%j.out",
-        "c" : 1,
-        "mem":5000
-    },
-     "compile_counts_and_stats" :
-    {
-        "J" : "compile_counts_and_stats",
-        "e" : "logs/compile_counts/compile_counts_and_stats_%j.err",
-        "o" : "logs/compile_counts/compile_counts_and_stats_%j.out",
-        "c" : 1,
-        "mem":5000
+        "mem":10000
     },
     "insertion_profile" :
     {
@@ -132,16 +116,16 @@
     "deseq2_init" :
     {
         "J" : "deseq2_init",
-        "e" : "logs/deseq2/deseq2_init_%j.err",
-        "o" : "logs/deseq2/deseq2_init_%j.out",
+        "e" : "logs/deseq2_init/deseq2_init_%j.err",
+        "o" : "logs/deseq2_init/deseq2_init_%j.out",
         "c" : 20,
         "mem" : 80000
     },
     "deseq2_plots" :
     {
         "J" : "deseq2_plots",
-        "e" : "logs/deseq2/deseq2_plots_%j.err",
-        "o" : "logs/deseq2/deseq2_plots_%j.out",
+        "e" : "logs/deseq2_plots/deseq2_plots_%j.err",
+        "o" : "logs/deseq2_plots/deseq2_plots_%j.out",
         "mem" : 30000
     },
     "deseq2" :

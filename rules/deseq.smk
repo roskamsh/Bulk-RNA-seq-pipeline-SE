@@ -23,7 +23,6 @@ rule deseq2_init:
 rule deseq2_plots:
     input:
         rds_object = "results/diffexp/{project_id}_rlog_dds.rds".format(project_id = project_id),
-        dds_object = "results/diffexp/{project_id}_all.rds".format(project_id = project_id),
     output:
         pca="results/diffexp/pca.pdf",
         sd_mean_plot="results/diffexp/sd_mean_plot.pdf",

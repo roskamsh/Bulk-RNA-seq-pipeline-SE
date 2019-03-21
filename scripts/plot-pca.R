@@ -30,9 +30,6 @@ cat(sprintf(c('ggplot2 PCA factor plot: ', ggplot_pca_factor,'\n')))
 cat(sprintf('Load rlog DESeqTransform object'))
 rld <-readRDS(rds)
 
-cat(sprintf('Load dds DESeqTransform object'))
-dds <-readRDS(dds)
-
 #####
 plot_cols <- snakemake@config[['meta_columns_to_plot']]
 subset_cols = names(plot_cols)

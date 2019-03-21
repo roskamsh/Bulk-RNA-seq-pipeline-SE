@@ -53,7 +53,7 @@ sampleDistMatrix <- as.matrix(sampleDists)
 
 rownames(sampleDistMatrix) <- paste(rld[[labels]], sep="-")
 colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
-pheatmap(sampleDistMatrix, fontsize=5, scale="row"
+pheatmap(sampleDistMatrix, fontsize=5, scale="row",
          clustering_distance_rows=sampleDists,
          clustering_distance_cols=sampleDists,
          col=colors)

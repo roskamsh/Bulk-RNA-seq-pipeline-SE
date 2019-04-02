@@ -66,6 +66,14 @@
         "c" : 1,
         "mem":10000
     },
+    "filter_counts" :
+    {
+        "J" : "filter_counts",
+        "e" : "logs/filter_counts/filter_counts_%j.err",
+        "o" : "logs/filter_counts/filter_counts_%j.out",
+        "c" : 1,
+        "mem":10000
+    },
     "insertion_profile" :
     {
         "J" : "insertion_profile",

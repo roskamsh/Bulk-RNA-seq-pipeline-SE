@@ -11,6 +11,8 @@ bed_file:
 # Pre-built star indexes for hg38
 star_index:
   /home/exacloud/lustre1/CEDAR/anurpa/genomes/
+filter_anno:
+  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
 ####################################################################
 # Tool-specific files that will not change from project-to-project
@@ -32,59 +34,57 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /path/to/metadata
+  /home/groups/CEDAR/woodfin/projects/Rick_hormone_bulkRNA/Bulk-RNA-seq-pipeline-SE/data/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  /path/to/base/directory
+  /home/groups/CEDAR/roskamsh/Bulk-RNA-seq-pipeline-SE
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
 #############################################################################################
 
+# Biotypes to include in your gene counts table - MUST be separated by a single comma and no white space
+# Example: protein_coding,lincRNA,sRNA,rRNA,snRNA,snoRNA
+biotypes:
+  protein_coding
 # Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
-  JK_Bulk
+  RNA190110RR
 # Genome assembly used for GO analysis, format must be as below, with the genome assembly first, and the version of ensembl second, separated by a period.
 assembly:
   hg38.90
 # The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
 baseline:
-  Day0_NI
+  WT
 # The column name of the characteristic you would like to do DE on. Example: Diagnosis, genotype, etc. This must be a column in your omic_meta_data.
 linear_model:
-  Type
+  Condition
 # The column name in which your sampleIDs are defined in omic_meta_data. These should match the sampleIDs in your fastq files.
 sample_id:
   SampleID
 # The column names in your omic_meta_data file which you would like to annotate your heatmaps by. This is used as a QC to look for batch effects. Enter columns which could potentially introduce a batch effect in your data.
 meta_columns_to_plot:
-  Type: Type
-  Gender: Gender
-  RNA_isolation_date: RNA_isolation_date
-  culture_media: culture_media
+  Condition: Condition
 # Contrasts which you would like to run differential expression on.
 # For example if you want to look at wild type (wt) vs. mutant (mut), you would specify mut-vs-wt
 # It is important that when listing your types here, you write your baseline SECOND
 diffexp:
   # contrasts for the deseq2 results method
   contrasts:
-    Day00_I-vs-Day00_NI:
-      - Day00_I
-      - Day00_NI
-    Day07_I-vs-Day00_NI:
-      - Day07_I
-      - Day00_NI
-    Day14_I-vs-Day00_NI:
-      - Day14_I
-      - Day00_NI
-    Day21_I-vs-Day00_NI:
-      - Day21_I
-      - Day00_NI
-    Day28_I-vs-Day00_NI:
-      - Day28_I
-      - Day00_NI
+    siKLF4-vs-WT:
+      - siKLF4
+      - WT
+    siKLF4_E2-vs-WT_E2:
+      - siKLF4_E2
+      - WT_E2
+    siKLF4_E2-vs-siKLF4:
+      - siKLF4_E2
+      - siKLF4
+    WT_E2-vs-WT:
+      - WT_E2
+      - WT
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:
   labels:
   # columns of sample sheet to use for PCA
-    - Type
+    - Condition

@@ -1,0 +1,84 @@
+##############################################################################
+# Genome and project-specific files that will change from project-to-project
+##############################################################################
+
+# GTF file for the genome build you would like to use
+gtf_file:
+  resources/chr10.gtf
+# Bed file for rseqc function read_distribution
+bed_file:
+  resources/chr10.bed
+# Pre-built star indexes for hg38
+star_index:
+  resources/
+
+####################################################################
+# Tool-specific files that will not change from project-to-project
+####################################################################
+
+# Fasta file including the illumina adapters to be trimmed out via Trimmomatic
+adapter:
+  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/TruSeq2-SE.fa
+# Pre-built genome indexes for various organisms which we will screen against to look for contamination
+conf:
+  /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
+# Paths to various tools which are used in this pipeline
+star_tool:
+  /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+
+##########################################
+# Important project-specific paths/files
+##########################################
+
+# Metadata needed for differential expression analysis
+omic_meta_data:
+  /home/groups/CEDAR/woodfin/projects/Rick_hormone_bulkRNA/Bulk-RNA-seq-pipeline-SE/data/metadata.txt
+# Path to your base directory (path to this directory)
+base_dir:
+  /home/groups/CEDAR/woodfin/projects/Rick_hormone_bulkRNA/Bulk-RNA-seq-pipeline-SE
+
+#############################################################################################
+# Project-specific specifications you will need to make prior to submission of the pipeline
+#############################################################################################
+
+# Unique project identifier which will be concatenated onto your counts table file name.
+project_id:
+  RNA190110RR
+# Genome assembly used for GO analysis, format must be as below, with the genome assembly first, and the version of ensembl second, separated by a period.
+assembly:
+  hg38.90
+# The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
+baseline:
+  WT
+# The column name of the characteristic you would like to do DE on. Example: Diagnosis, genotype, etc. This must be a column in your omic_meta_data.
+linear_model:
+  Condition
+# The column name in which your sampleIDs are defined in omic_meta_data. These should match the sampleIDs in your fastq files.
+sample_id:
+  SampleID
+# The column names in your omic_meta_data file which you would like to annotate your heatmaps by. This is used as a QC to look for batch effects. Enter columns which could potentially introduce a batch effect in your data.
+meta_columns_to_plot:
+  Condition: Condition
+# Contrasts which you would like to run differential expression on.
+# For example if you want to look at wild type (wt) vs. mutant (mut), you would specify mut-vs-wt
+# It is important that when listing your types here, you write your baseline SECOND
+diffexp:
+  # contrasts for the deseq2 results method
+  contrasts:
+    siKLF4-vs-WT:
+      - siKLF4
+      - WT
+    siKLF4_E2-vs-WT_E2:
+      - siKLF4_E2
+      - WT_E2
+    siKLF4_E2-vs-siKLF4:
+      - siKLF4_E2
+      - siKLF4
+    WT_E2-vs-WT:
+      - WT_E2
+      - WT
+# The column name in your omic_meta_data file to colour your PCA plot by
+pca:
+  labels:
+  # columns of sample sheet to use for PCA
+    - Condition

@@ -97,3 +97,14 @@ rule compile_star_counts:
     script:
         "../scripts/compile_star_counts.py"
 
+rule filter_counts:
+    input:
+        "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+    output:
+        "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
+    params:
+        anno=config["filter_anno"],
+        biotypes=config["biotypes"]
+    shell:
+        """Rscript scripts/RNAseq_filterCounts.R --countsFile={input} --annoFile={params.anno} --biotypes={params.biotypes}"""
+

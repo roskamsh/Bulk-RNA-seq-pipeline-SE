@@ -2,7 +2,7 @@ contrast = get_contrast
 
 rule deseq2_init:
     input:
-        counts = "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+        counts = "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
     output:
         rds="results/diffexp/{project_id}_all.rds".format(project_id=project_id),
         normed_counts="results/tables/{project_id}_normed_counts.txt".format(project_id = project_id),
@@ -66,8 +66,6 @@ rule GO:
     output:
         "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_GO.txt",
         "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_GO.txt",
-        "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01.BP.pdf",
-        "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01.BP.pdf",
         "results/diffexp/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_classic_5_all.pdf",
         "results/diffexp/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_classic_5_all.pdf"
     params:
@@ -88,7 +86,7 @@ rule volcano:
 
 rule permutation:
     input:
-        counts = "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+        counts = "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
     output:
         numGenes = "results/diffexp/permutationTest/{contrast}.number.diff.genes.csv",
         permList = "results/diffexp/permutationTest/{contrast}.permutation.list.csv",

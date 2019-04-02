@@ -64,24 +64,30 @@ if(grepl('rda$|RData$',degFile)){
 if(grepl('txt$|tsv$',degFile)){
     deg <- read.delim(file=degFile,header=TRUE,sep="\t")
 }
-rownames(deg) <- sub("\\.[0-9]*","",rownames(deg))
+#rownames(deg) <- sub("\\.[0-9]*","",rownames(deg))
 
 ##---------load correct Biomart------------------------#
 if (assembly == "hg19") {
     organismStr <- "hsapiens"
-    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg19.Ens_75.biomaRt.GO.geneID2GO.RData"))
+    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg19.Ens_75.biomaRt.GO.external.geneID2GO.RData"))
     xx <- get(load("/home/groups/CEDAR/anno/biomaRt/GO.db.Term.list.rda"))
 }
 if (assembly == "hg38.89") {
     organismStr <- "hsapiens"
     ### to get to hg38 mappings ensembl 89!
-    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg38.Ens_89.biomaRt.GO.geneID2GO.RData"))
+    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg38.Ens_89.biomaRt.GO.external.geneID2GO.RData"))
     xx <- get(load("/home/groups/CEDAR/anno/biomaRt/GO.db.Term.list.rda"))
 }
 if (assembly == "hg38.90") {
     organismStr <- "hsapiens"
     ### to get to hg38 mappings ensembl 90!
-    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.GO.geneID2GO.RData"))
+    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.GO.external.geneID2GO.RData"))
+    xx <- get(load("/home/groups/CEDAR/anno/biomaRt/GO.db.Term.list.rda"))
+}
+if (assembly == "mm10") {
+    organismStr <- "mmusculus"
+    ### to get to hg38 mappings ensembl 90!
+    geneID2GO <- get(load("/home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.GO.external.geneID2GO.RData"))
     xx <- get(load("/home/groups/CEDAR/anno/biomaRt/GO.db.Term.list.rda"))
 }
 

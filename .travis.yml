@@ -19,6 +19,7 @@ install:
   - conda create -q -n star star=2.5.3a
   - source activate star
   # create STAR index (too big to live in git)
+  - gunzip .test/resources/GRCh38_chr10.fa.gz
   - STAR --runMode genomeGenerate --genomeDir .test/resources --genomeFastaFiles .test/resources/GRCh38_chr10.fa
   # create fastq screen references (too big to live in git)
   - conda create -q -n fastq_sc fastq-screen

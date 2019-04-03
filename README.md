@@ -1,3 +1,5 @@
+![Snakemake](https://img.shields.io/badge/snakemake-≥5.2.1-brightgreen.svg) [![Build Status](https://travis-ci.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE.svg?branch=master)](https://travis-ci.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE)
+
 # Bulk-RNA-seq-pipeline-SE
 
 Pipeline to run basic RNA-seq analysis on single-end data.

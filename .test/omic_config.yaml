@@ -18,13 +18,13 @@ star_index:
 
 # Fasta file including the illumina adapters to be trimmed out via Trimmomatic
 adapter:
-  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/TruSeq2-SE.fa
+  resources/TruSeq2-SE.fa
 # Pre-built genome indexes for various organisms which we will screen against to look for contamination
 conf:
-  /home/groups/CEDAR/tools/FastQ_Screen_Genomes/fastq_screen.conf
+  resources/fastq_screen.conf
 # Paths to various tools which are used in this pipeline
 star_tool:
-  /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+  STAR
 
 ##########################################
 # Important project-specific paths/files

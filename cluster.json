@@ -118,9 +118,9 @@
     {
         "J" : "run_qc_qa",
         "e" : "logs/run_qc_qa/run_qc_qa_%j.err",
-        "o" : "logs/run_qc_qa/run_qc_qa_%j.out", 
-        "mem" : 45000 
-    }, 
+        "o" : "logs/run_qc_qa/run_qc_qa_%j.out",
+        "mem" : 45000
+    },
     "deseq2_init" :
     {
         "J" : "deseq2_init",

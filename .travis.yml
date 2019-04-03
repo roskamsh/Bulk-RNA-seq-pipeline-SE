@@ -23,10 +23,10 @@ install:
   # create fastq screen references (too big to live in git)
   - conda create -q -n fastq_sc fastq-screen
   - source activate fastq_sc
-  - mkdir .data/fastq_screen_reference
-  - cd .data/fastq_screen_reference
+  - mkdir .test/data/fastq_screen_reference
+  - cd .test/data/fastq_screen_reference
   - fastq_screen --get_genomes
-  - cd ../..
+  - cd ../../..
 
 
 script:

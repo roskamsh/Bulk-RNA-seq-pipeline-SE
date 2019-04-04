@@ -129,20 +129,20 @@
         "c" : 20,
         "mem" : 80000
     },
-    "deseq2_plots" :
+    "deseq2_pairwise" :
     {
-        "J" : "deseq2_plots",
-        "e" : "logs/deseq2_plots/deseq2_plots_%j.err",
-        "o" : "logs/deseq2_plots/deseq2_plots_%j.out",
-        "mem" : 30000
-    },
-    "deseq2" :
-    {
-        "J" : "deseq2",
-        "e" : "logs/deseq2/deseq2_%j.err",
-        "o" : "logs/deseq2/deseq2_%j.out",
+        "J" : "deseq2_pairwise",
+        "e" : "logs/deseq2_pairwise/deseq2_pairwise_%j.err",
+        "o" : "logs/deseq2_pairwise/deseq2_pairwise_%j.out",
         "c" : 20,
         "mem":80000
+    },
+    "deseq2_group" :
+    {
+        "J" : "deseq2_group",
+        "e" : "logs/deseq2_group/deseq2_group_%j.err",
+        "o" : "logs/deseq2_group/deseq2_group_%j.out",
+        "mem" : 30000
     },
     "GO" :
     {

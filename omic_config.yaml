@@ -34,10 +34,10 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /home/groups/CEDAR/woodfin/projects/Rick_hormone_bulkRNA/Bulk-RNA-seq-pipeline-SE/data/metadata.txt
+  /path/to/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  /home/groups/CEDAR/roskamsh/Bulk-RNA-seq-pipeline-SE
+  /path/to/base/directory
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
@@ -83,6 +83,10 @@ diffexp:
     WT_E2-vs-WT:
       - WT_E2
       - WT
+  LRT:
+    - siKLF4
+    - siKLF4_E2
+    - WT
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:
   labels:

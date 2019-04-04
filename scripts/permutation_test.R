@@ -18,9 +18,9 @@ Type <- snakemake@params[['linear_model']]
 
 contrast <- snakemake@params[['contrast']]
 
-baseline <- contrast[[1]]
+baseline <- contrast[[2]]
 
-target <- contrast[[2]]
+target <- contrast[[1]]
 
 md <- read.delim(file=metadata, sep = "\t", stringsAsFactors = FALSE)
 md <- md[with(md, order(SampleID)),]

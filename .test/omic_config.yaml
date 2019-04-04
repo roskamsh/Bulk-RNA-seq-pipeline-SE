@@ -4,10 +4,10 @@
 
 # GTF file for the genome build you would like to use
 gtf_file:
-  resources/chr10.gtf
+  resources/chr21.gtf
 # Bed file for rseqc function read_distribution
 bed_file:
-  resources/chr10.bed
+  resources/chr21.bed
 # Pre-built star indexes for hg38
 star_index:
   resources/
@@ -68,15 +68,7 @@ diffexp:
     siKLF4-vs-WT:
       - siKLF4
       - WT
-    siKLF4_E2-vs-WT_E2:
-      - siKLF4_E2
-      - WT_E2
-    siKLF4_E2-vs-siKLF4:
-      - siKLF4_E2
-      - siKLF4
-    WT_E2-vs-WT:
-      - WT_E2
-      - WT
+
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:
   labels:

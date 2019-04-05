@@ -12,6 +12,9 @@ bed_file:
 star_index:
   resources/
 
+filer_anno:
+  resources/hg38.Ens_90.biomaRt.geneAnno.Rdata
+
 ####################################################################
 # Tool-specific files that will not change from project-to-project
 ####################################################################

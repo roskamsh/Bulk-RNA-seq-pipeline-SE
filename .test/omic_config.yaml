@@ -21,7 +21,7 @@ adapter:
   resources/TruSeq2-SE.fa
 # Pre-built genome indexes for various organisms which we will screen against to look for contamination
 conf:
-  resources/fastq_screen.conf
+  FastQ_Screen_Genomes/fastq_screen.conf
 # Paths to various tools which are used in this pipeline
 star_tool:
   STAR

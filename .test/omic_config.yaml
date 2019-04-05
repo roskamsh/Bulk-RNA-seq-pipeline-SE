@@ -12,7 +12,7 @@ bed_file:
 star_index:
   resources/
 
-filer_anno:
+filter_anno:
   resources/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
 ####################################################################
@@ -69,6 +69,9 @@ diffexp:
   # contrasts for the deseq2 results method
   contrasts:
     siKLF4-vs-WT:
+      - siKLF4
+      - WT
+    LRT:
       - siKLF4
       - WT
 

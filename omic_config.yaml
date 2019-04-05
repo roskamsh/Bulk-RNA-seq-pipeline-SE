@@ -11,6 +11,8 @@ bed_file:
 # Pre-built star indexes for hg38
 star_index:
   resources/
+filter_anno:
+  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
 ####################################################################
 # Tool-specific files that will not change from project-to-project
@@ -32,15 +34,19 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /home/groups/CEDAR/roskamsh/Bulk-RNA-seq-pipeline-SE/data/metadata.txt
+  /path/to/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  /home/groups/CEDAR/roskamsh/Bulk-RNA-seq-pipeline-SE
+  /path/to/base/directory
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
 #############################################################################################
 
+# Biotypes you would like to include in your gene counts table
+# Example: protein_coding,lincRNA,sRNA,rRNA,snRNA,snoRNA
+biotypes:
+  protein_coding
 # Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
   RNA190110RR

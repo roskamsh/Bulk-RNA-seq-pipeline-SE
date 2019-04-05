@@ -20,10 +20,6 @@ install:
   - source activate star
   # create STAR index (too big to live in git)
   - STAR --runMode genomeGenerate --genomeDir .test/resources --genomeFastaFiles .test/resources/GRCh38_chr21.fa
-  # create fastq screen references (too big to live in git)
-  - conda create -q -n fastq_sc fastq-screen
-  - source activate fastq_sc
-  - fastq_screen --get_genomes
 
 
 script:

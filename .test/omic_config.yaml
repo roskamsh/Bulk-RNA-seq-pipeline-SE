@@ -15,6 +15,9 @@ star_index:
 filter_anno:
   resources/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
+biotypes:
+  protein_coding
+
 ####################################################################
 # Tool-specific files that will not change from project-to-project
 ####################################################################
@@ -35,10 +38,10 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /home/groups/CEDAR/woodfin/projects/Rick_hormone_bulkRNA/Bulk-RNA-seq-pipeline-SE/data/metadata.txt
+  data/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  /home/groups/CEDAR/woodfin/projects/Rick_hormone_bulkRNA/Bulk-RNA-seq-pipeline-SE
+  .
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
@@ -46,7 +49,7 @@ base_dir:
 
 # Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
-  RNA190110RR
+  TravisCI
 # Genome assembly used for GO analysis, format must be as below, with the genome assembly first, and the version of ensembl second, separated by a period.
 assembly:
   hg38.90

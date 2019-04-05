@@ -4,15 +4,13 @@
 
 # GTF file for the genome build you would like to use
 gtf_file:
-  /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.v27.annotation.gtf
+  resources/chr21.gtf
 # Bed file for rseqc function read_distribution
 bed_file:
-  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/gencode_v27.bed
+  resources/chr21.bed
 # Pre-built star indexes for hg38
 star_index:
-  /home/exacloud/lustre1/CEDAR/anurpa/genomes/
-filter_anno:
-  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.geneAnno.Rdata
+  resources/
 
 ####################################################################
 # Tool-specific files that will not change from project-to-project
@@ -43,10 +41,6 @@ base_dir:
 # Project-specific specifications you will need to make prior to submission of the pipeline
 #############################################################################################
 
-# Biotypes to include in your gene counts table - MUST be separated by a single comma and no white space
-# Example: protein_coding,lincRNA,sRNA,rRNA,snRNA,snoRNA
-biotypes:
-  protein_coding
 # Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
   RNA190110RR

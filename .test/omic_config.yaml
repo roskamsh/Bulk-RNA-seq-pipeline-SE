@@ -74,9 +74,9 @@ diffexp:
     siKLF4-vs-WT:
       - siKLF4
       - WT
-    LRT:
-      - siKLF4
-      - WT
+  LRT:
+    - siKLF4
+    - WT
 
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:

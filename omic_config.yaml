@@ -11,6 +11,8 @@ bed_file:
 # Pre-built star indexes for hg38
 star_index:
   resources/
+filter_anno:
+  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
 ####################################################################
 # Tool-specific files that will not change from project-to-project
@@ -41,6 +43,10 @@ base_dir:
 # Project-specific specifications you will need to make prior to submission of the pipeline
 #############################################################################################
 
+# Biotypes you would like to include in your gene counts table
+# Example: protein_coding,lincRNA,sRNA,rRNA,snRNA,snoRNA
+biotypes:
+  protein_coding
 # Unique project identifier which will be concatenated onto your counts table file name.
 project_id:
   RNA190110RR

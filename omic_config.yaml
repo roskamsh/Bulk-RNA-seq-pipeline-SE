@@ -34,10 +34,10 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /path/to/metadata.txt
+  /home/groups/CEDAR/roskamsh/Bulk-RNA-seq-pipeline-SE/data/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  /path/to/base/directory
+  /home/groups/CEDAR/roskamsh/Bulk-RNA-seq-pipeline-SE
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline

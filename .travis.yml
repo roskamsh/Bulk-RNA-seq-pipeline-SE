@@ -15,9 +15,8 @@ install:
   - conda config --add channels defaults
   - conda config --add channels conda-forge
   - conda config --add channels bioconda
-  - conda create -q -n snakemake snakemake>=5.1.2 python=$TRAVIS_PYTHON_VERSION
-  - conda create -q -n star star=2.5.3a
-  - source activate star
+  - conda create -q -n snakemake snakemake>=5.1.2 python=$TRAVIS_PYTHON_VERSION star=2.5.3a
+  - source activate snakemake
   # create STAR index (too big to live in git)
   - STAR --runMode genomeGenerate --genomeDir .test/resources --genomeFastaFiles .test/resources/GRCh38_chr21.fa
 

@@ -3,8 +3,6 @@ rule trimming:
         "samples/raw/{sample}.fastq.gz"
     output:
         "samples/trimmed/{sample}_t.fastq"
-    log:
-        "logs/trimming/{sample}_trimming.log"
     params:
         adapter = config["adapter"]
     conda:
@@ -20,8 +18,7 @@ rule fastqc:
         "samples/trimmed/{sample}_t.fastq"
     output:
         "samples/fastqc/{sample}/{sample}_t_fastqc.zip"
-    log:
-        "logs/fastqc/{sample}_fastqc.log"
+
     conda:
         "../envs/fastqc.yaml"
     message:
@@ -53,8 +50,7 @@ rule STAR:
     threads: 12
     params:
         gtf=config["gtf_file"]
-    log:
-        "logs/star/{sample}_star.log"
+
     run:
          STAR=config["star_tool"],
          pathToGenomeIndex = config["star_index"]

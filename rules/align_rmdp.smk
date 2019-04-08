@@ -14,6 +14,7 @@ rule trimming:
     shell:
         """trimmomatic SE -phred33 {input} {output} ILLUMINACLIP:{params.adapter}:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:50"""
 
+
 rule fastqc:
     input:
         "samples/trimmed/{sample}_t.fastq"

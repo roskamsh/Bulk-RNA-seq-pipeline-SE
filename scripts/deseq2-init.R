@@ -32,7 +32,7 @@ md <- read.delim(file=metadata, sep = "\t", stringsAsFactors = FALSE)
 md <- md[order(md[sampleID]),]
 
 # Read in counts table
-subdata <- read.table(counts, header=TRUE, row.names=1, sep="\t")
+subdata <- read.table(counts, header=TRUE, row.names=1, sep="\t", check.names=FALSE)
 subdata <- subdata[,order(colnames(subdata))]
 
 # Check

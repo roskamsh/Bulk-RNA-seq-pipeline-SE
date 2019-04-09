@@ -13,7 +13,7 @@ star_index:
   resources/
 
 filter_anno:
-  resources/hg38.Ens_90.biomaRt.geneAnno.Rdata
+  /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test/resources/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
 biotypes:
   protein_coding

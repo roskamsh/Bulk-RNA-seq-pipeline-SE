@@ -15,7 +15,9 @@ install:
   - conda config --add channels defaults
   - conda config --add channels conda-forge
   - conda config --add channels bioconda
-  - conda create -q -n snakemake snakemake>=5.1.2 python=$TRAVIS_PYTHON_VERSION star=2.5.3a r-essentials r-base
+  - sudo apt-get install -y r-base
+  - echo 'source("https://bioconductor.org/biocLite.R"); biocLite("S4Vectors"); biocLite("GenomicRanges")' > install.R
+  - conda create -q -n snakemake snakemake>=5.1.2 python=$TRAVIS_PYTHON_VERSION star=2.5.3a
   - source activate snakemake
   # create STAR index (too big to live in git)
   - STAR --runMode genomeGenerate --genomeDir .test/resources --genomeFastaFiles .test/resources/GRCh38_chr21.fa
@@ -23,8 +25,6 @@ install:
 
 script:
   - source activate snakemake
-  - pwd -P
-  - ls .test/FastQ_Screen_Genomes
   # run the workflow
   - snakemake --use-conda --directory .test || (for f in .test/logs/*; do echo $f; cat $f; done; for f in .test/logs/*/*; do echo $f; cat $f; done; exit 1)
   - snakemake --use-conda --use-singularity --directory .test

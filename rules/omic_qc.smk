@@ -56,7 +56,7 @@ rule generate_qc_qa:
     counts = "data/{project_id}_counts.filt.txt".format(project_id=config['project_id'])
  params:
     project_id = config["project_id"],
-    datadir = config['base_dir'],
+    read_dir = config['base_dir'],
     meta = config["omic_meta_data"],
     baseline = config["baseline"],
     linear_model = config["linear_model"],

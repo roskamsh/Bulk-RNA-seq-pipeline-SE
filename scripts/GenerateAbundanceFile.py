@@ -298,7 +298,7 @@ optabundancegroup.add_argument("-pl", "--plot_me",
 
 args = parser.parse_args()
 
-args.datadir = snakemake.params.datadir
+args.read_dir = snakemake.params.read_dir
 args.meta = snakemake.params.meta
 args.project_id = snakemake.params.project_id
 args.baseline = snakemake.params.baseline

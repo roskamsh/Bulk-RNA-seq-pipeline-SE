@@ -103,4 +103,4 @@ rule filter_counts:
         anno=config["filter_anno"],
         biotypes=config["biotypes"]
     script:
-        "..scripts/RNAseq_filterCounts.R"
+        "../scripts/RNAseq_filterCounts.R"

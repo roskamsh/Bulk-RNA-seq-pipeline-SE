@@ -76,5 +76,5 @@ rule run_qc_qa:
         "results/tables/{project_id}_Normed_with_Ratio_and_Abundance.txt".format(project_id=config['project_id'])
     conda:
         "../envs/omic_qc_wf.yaml"
-    shell:
-        "Rscript analysis_code/{project_id}_analysis.R".format(project_id=config['project_id'])
+    script:
+        "../analysis_code/{project_id}_analysis.R".format(project_id=config['project_id'])

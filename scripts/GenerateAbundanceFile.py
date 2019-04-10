@@ -12,7 +12,6 @@ Author: Joey Estabrook <estabroj@exacloud.ohsu.edu>
 """
 
 
-
 def ensure_dir(relnm):
     """ Accept relative filepath string, create it if it doesnt already exist
         return filepath string
@@ -299,19 +298,19 @@ optabundancegroup.add_argument("-pl", "--plot_me",
 
 args = parser.parse_args()
 
-args.datadir = snakemake.input.datadir
+args.datadir = snakemake.params.datadir
 args.meta = snakemake.params.meta
-args.project_id = snakemake.input.project_id
-args.baseline = snakemake.input.baseline
-args.linear_model = snakemake.input.linear_model
+args.project_id = snakemake.params.project_id
+args.baseline = snakemake.params.baseline
+args.linear_model = snakemake.params.linear_model
 
 sample_id = snakemake.params.sample_id
 args.sample_id = "{}".format(sample_id)
 
-meta_viz = snakemake.input.meta_viz
+meta_viz = snakemake.params.meta_viz
 args.meta_viz = "{}".format(meta_viz)
 
-gtf_file = snakemake.input.gtf_file
+gtf_file = snakemake.params.gtf_file
 args.gtf_file = "{}".format(gtf_file)
 
 args.counts = snakemake.input.counts
@@ -323,4 +322,3 @@ generate_abundance_script(args.read_dir, args.meta_file, args.code_dir, args.tax
                       args.gtf_feature, args.read_pattern, args.useme_cols, args.label_from_colname,
                       args.path_type, args.path_norms, args.covariate, args.plot_me, args.load_table,
                       args.data_file_path, args.deseq, args.logged_B)
-

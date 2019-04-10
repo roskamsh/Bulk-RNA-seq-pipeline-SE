@@ -1,5 +1,6 @@
 contrast = get_contrast
 
+
 rule deseq2_init:
     input:
         counts = "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
@@ -16,6 +17,7 @@ rule deseq2_init:
     threads: get_deseq2_threads()
     script:
         "../scripts/deseq2-init.R"
+
 
 rule deseq2_pairwise:
     input:
@@ -40,6 +42,7 @@ rule deseq2_pairwise:
     script:
         "../scripts/deseq2_pairwise.R"
 
+
 rule deseq2_group:
     input:
         counts = "data/{project_id}_counts.filt.txt".format(project_id = project_id)
@@ -61,6 +64,7 @@ rule deseq2_group:
     script:
         "../scripts/deseq2_group.R"
 
+
 rule GO:
     input:
         degFile="results/diffexp/pairwise/{contrast}.diffexp.tsv"
@@ -78,6 +82,7 @@ rule GO:
     script:
         "../scripts/runGOforDESeq2.R"
 
+
 rule volcano:
     input:
         degFile="results/diffexp/pairwise/{contrast}.diffexp.tsv"
@@ -89,6 +94,7 @@ rule volcano:
         adjp = config["adjp"]
     script:
         "../scripts/RNAseq_makeVolcano.R"
+
 
 rule permutation:
     input:
@@ -106,4 +112,3 @@ rule permutation:
         "../envs/permutation.yaml"
     script:
         "../scripts/permutation_test.R"
-

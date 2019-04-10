@@ -17,16 +17,16 @@ help <- function(){
     q()
 }
 
+
+degFile = snakemake@input[['degFile']]
+
+FC <- snakemake@params[['FC']]
+
+adjp <- snakemake@params[['adjp']]
+
 ## Save values of each argument
 if(!is.na(charmatch("--help",args)) || !is.na(charmatch("-h",args))){
     help()
-} else {
-    degFile  <-sub('--degFile=', '', args[grep('--degFile=', args)])
-    adjp     <-sub('--adjp=', '', args[grep('--adjp=', args)])
-    FC       <-sub('--FC=', '', args[grep('--FC=', args)])
-    upCol    <- sub('--upCol=', '', args[grep('--upCol=', args)])
-    downCol  <- sub('--downCol=', '', args[grep('--downCol=', args)])
-    ncCol    <- sub('--ncCol=', '', args[grep('--ncCol=', args)])
 }
 
 ## set defaults if options are not provided
@@ -79,9 +79,9 @@ down <- deg$padj < adjp & deg$log2FoldChange < -log2(FC)
 sum(down)
 
 ## set labels for pdf
-adjplabel <- gsub("^0\\.","",adjp)
+# adjplabel <- gsub("^0\\.","",adjp)
 comparison <- gsub("\\.txt$|\\.rda|\\.tsv","",degFile)
-pdfFile <- paste(comparison,adjplabel,"VolcanoPlot.pdf",sep=".")
+pdfFile <- paste(comparison,adjp,"VolcanoPlot.pdf",sep=".")
 print(pdfFile)
 
 ## remove directory to use in plot

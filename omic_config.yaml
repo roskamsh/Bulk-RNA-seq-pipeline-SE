@@ -53,6 +53,15 @@ project_id:
 # Genome assembly used for GO analysis, format must be as below, with the genome assembly first, and the version of ensembl second, separated by a period.
 assembly:
   hg38.90
+#option to print GOterm tree (0/1)
+printTree:
+  1
+#fold change cutoff (not log2 transformed) for GO analysis
+FC:
+  2
+#FDR adjusted p-value cutoff for GO analysis
+adjp:
+  0.01
 # The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
 baseline:
   WT

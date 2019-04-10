@@ -17,15 +17,20 @@ help <- function(){
     q()
 }
 
+
+degFile = snakemake@input[['degFile']]
+
+assembly <- snakemake@params[['assembly']]
+
+FC <- snakemake@params[['FC']]
+
+adjp <- snakemake@params[['adjp']]
+
+printTree <- snakemake@params[['printTree']]
+
 ## Save values of each argument
 if(!is.na(charmatch("--help",args)) || !is.na(charmatch("-h",args))){
     help()
-} else {
-    degFile   <-sub('--degFile=', '', args[grep('--degFile=', args)])
-    adjp      <-sub('--adjp=', '', args[grep('--adjp=', args)])
-    assembly  <-sub('--assembly=', '', args[grep('--assembly=', args)])
-    FC        <-sub('--FC=', '', args[grep('--FC=', args)])
-    printTree <-sub('--printTree=', '', args[grep('--printTree=', args)])
 }
 
 if (identical(adjp,character(0))){

@@ -63,27 +63,32 @@ rule deseq2_group:
 
 rule GO:
     input:
-        "results/diffexp/pairwise/{contrast}.diffexp.tsv"
+        degFile="results/diffexp/pairwise/{contrast}.diffexp.tsv"
     output:
-        "results/diffexp/pairwise/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_GO.txt",
-        "results/diffexp/pairwise/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_GO.txt",
-        "results/diffexp/pairwise/GOterms/{contrast}.diffexp.downFC.2.adjp.0.01_BP_classic_5_all.pdf",
-        "results/diffexp/pairwise/GOterms/{contrast}.diffexp.upFC.2.adjp.0.01_BP_classic_5_all.pdf"
+        "results/diffexp/pairwise/GOterms/{{contrast}}.diffexp.downFC.{FC}.adjp.{adjp}_BP_GO.txt".format(FC = config["FC"],adjp=config["adjp"]),
+        "results/diffexp/pairwise/GOterms/{{contrast}}.diffexp.upFC.{FC}.adjp.{adjp}_BP_GO.txt".format(FC = config["FC"],adjp=config["adjp"])
     params:
         contrast = get_contrast,
-        assembly = config["assembly"]
+        assembly = config["assembly"],
+        printTree = config["printTree"],
+        FC = config["FC"],
+        adjp = config["adjp"]
     conda:
         "../envs/runGO.yaml"
-    shell: """Rscript scripts/runGOforDESeq2.R --degFile={input} --assembly={params.assembly} --FC=2 --adjp=0.01 --printTree=1"""
+    script:
+        "../scripts/runGOforDESeq2.R"
 
 rule volcano:
     input:
-        "results/diffexp/pairwise/{contrast}.diffexp.tsv"
+        degFile="results/diffexp/pairwise/{contrast}.diffexp.tsv"
     output:
-        "results/diffexp/pairwise/{contrast}.diffexp.01.VolcanoPlot.pdf"
+        "results/diffexp/pairwise/{{contrast}}.diffexp.{adjp}.VolcanoPlot.pdf".format(adjp=config["adjp"])
     params:
-       contrast = get_contrast
-    shell: """Rscript scripts/RNAseq_makeVolcano.R --degFile={input} --adjp=0.01 --FC=2"""
+        contrast = get_contrast,
+        FC = config["FC"],
+        adjp = config["adjp"]
+    script:
+        "../scripts/RNAseq_makeVolcano.R"
 
 rule permutation:
     input:

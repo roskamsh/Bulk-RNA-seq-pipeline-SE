@@ -96,7 +96,7 @@ rule compile_star_counts:
 
 rule filter_counts:
     input:
-        "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+        countsFile="data/{project_id}_counts.txt".format(project_id=config["project_id"])
     output:
         "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
     params:

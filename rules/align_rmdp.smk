@@ -102,6 +102,5 @@ rule filter_counts:
     params:
         anno=config["filter_anno"],
         biotypes=config["biotypes"]
-    shell:
-        """Rscript scripts/RNAseq_filterCounts.R --countsFile={input} --annoFile={params.anno} --biotypes={params.biotypes}"""
-
+    script:
+        "..scripts/RNAseq_filterCounts.R"

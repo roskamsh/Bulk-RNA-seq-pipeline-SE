@@ -1,5 +1,13 @@
 args <- commandArgs()
 
+annoFile = snakemake@params[['anno']]
+
+biotypes <- snakemake@params[['biotypes']]
+
+countsFile <- snakemake@input[['countsFile']]
+
+
+
 help <- function(){
     cat("RNAseq_filterCounts.R :
 - Script to filter counts table based on biotype and/or mito genes.
@@ -23,12 +31,13 @@ help <- function(){
 ## Save values of each argument
 if(!is.na(charmatch("--help",args)) || !is.na(charmatch("-h",args))){
     help()
-} else {
-    countsFile <-sub('--countsFile=', '', args[grep('--countsFile=', args)])
-    annoFile   <-sub('--annoFile=', '', args[grep('--annoFile=', args)])
-    mito       <-sub('--mito=', '', args[grep('--mito=', args)])
-    biotypes   <-sub('--biotypes=', '', args[grep('--biotypes=', args)])
 }
+# else {
+#     countsFile <-sub('--countsFile=', '', args[grep('--countsFile=', args)])
+#     annoFile   <-sub('--annoFile=', '', args[grep('--annoFile=', args)])
+#     mito       <-sub('--mito=', '', args[grep('--mito=', args)])
+#     biotypes   <-sub('--biotypes=', '', args[grep('--biotypes=', args)])
+# }
 
 ## set defaults if options are not provided
 if (identical( mito, character(0) )){

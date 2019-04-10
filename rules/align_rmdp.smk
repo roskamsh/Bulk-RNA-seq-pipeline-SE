@@ -26,6 +26,7 @@ rule fastqc:
     shell:
         """fastqc --outdir  samples/fastqc/{wildcards.sample} --extract  -f fastq {input}"""
 
+
 rule fastqscreen:
     input:
         "samples/trimmed/{sample}_t.fastq"
@@ -39,6 +40,7 @@ rule fastqscreen:
         "../envs/fastqscreen.yaml"
     shell:
         """fastq_screen --aligner bowtie2 --conf {params.conf} --outdir samples/fastqscreen/{wildcards.sample} {input}"""
+
 
 rule STAR:
     input:
@@ -66,6 +68,7 @@ rule STAR:
                 --twopassMode Basic
                 """)
 
+
 rule index:
     input:
         "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
@@ -76,6 +79,7 @@ rule index:
     shell:
         """samtools index {input} {output}"""
 
+
 rule star_statistics:
     input:
         expand("samples/star/{sample}_bam/Log.final.out",sample=SAMPLES)
@@ -83,6 +87,7 @@ rule star_statistics:
         "results/tables/{project_id}_STAR_mapping_statistics.txt".format(project_id = config["project_id"])
     script:
         "../scripts/compile_star_log.py"
+
 
 rule compile_star_counts:
     input:
@@ -94,6 +99,7 @@ rule compile_star_counts:
     script:
         "../scripts/compile_star_counts.py"
 
+
 rule filter_counts:
     input:
         countsFile="data/{project_id}_counts.txt".format(project_id=config["project_id"])
@@ -101,6 +107,7 @@ rule filter_counts:
         "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
     params:
         anno=config["filter_anno"],
-        biotypes=config["biotypes"]
+        biotypes=config["biotypes"],
+        mito=config['mito']
     script:
         "../scripts/RNAseq_filterCounts.R"

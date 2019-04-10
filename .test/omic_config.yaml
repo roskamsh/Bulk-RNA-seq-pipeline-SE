@@ -54,7 +54,9 @@ project_id:
 assembly:
   hg38.90
 # The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
-
+# remove mito genes (1/0)
+mito:
+  1
 #option to print GOterm tree (0/1)
 printTree:
   1

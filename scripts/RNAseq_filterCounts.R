@@ -6,6 +6,7 @@ biotypes <- snakemake@params[['biotypes']]
 
 countsFile <- snakemake@input[['countsFile']]
 
+mito <- snakemake@params[['mito']]
 
 
 help <- function(){
@@ -32,12 +33,6 @@ help <- function(){
 if(!is.na(charmatch("--help",args)) || !is.na(charmatch("-h",args))){
     help()
 }
-# else {
-#     countsFile <-sub('--countsFile=', '', args[grep('--countsFile=', args)])
-#     annoFile   <-sub('--annoFile=', '', args[grep('--annoFile=', args)])
-#     mito       <-sub('--mito=', '', args[grep('--mito=', args)])
-#     biotypes   <-sub('--biotypes=', '', args[grep('--biotypes=', args)])
-# }
 
 ## set defaults if options are not provided
 if (identical( mito, character(0) )){

@@ -65,8 +65,8 @@ rule generate_qc_qa:
     meta_viz = format_plot_columns(),
  output:
     "analysis_code/{project_id}_analysis.R".format(project_id=project_id)
- shell:
-    "python GenerateAbundanceFile.py -d {params.datadir} -mf {params.meta} -p {params.project_id} -b {params.baseline} -lm {params.linear_model} -id '{params.sample_id}' -pl '{params.meta_viz}' -g '{params.gtf_file}' -df -da {input.counts}"
+ script:
+    "../scripts/GenerateAbundanceFile.py"
 
 
 rule run_qc_qa:

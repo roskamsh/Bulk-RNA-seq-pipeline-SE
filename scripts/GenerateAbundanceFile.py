@@ -302,7 +302,7 @@ args.read_dir = snakemake.params.read_dir
 args.meta = snakemake.params.meta
 args.project_title = snakemake.params.project_id
 args.baseline = snakemake.params.baseline
-args.linear_model = snakemake.params.linear_model
+args.lmBy = snakemake.params.linear_model
 
 sample_id = snakemake.params.sample_id
 args.sample_id = "{}".format(sample_id)

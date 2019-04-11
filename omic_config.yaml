@@ -27,6 +27,11 @@ conf:
 # Paths to various tools which are used in this pipeline
 star_tool:
   /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+# Path to omic resources repository
+# Default sets code_dir to /home/groups/CEDAR/roskamsh/tools/omic_resources/
+code_dir:
+  default
+
 
 ##########################################
 # Important project-specific paths/files

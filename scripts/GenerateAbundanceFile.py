@@ -300,7 +300,7 @@ args = parser.parse_args()
 
 args.read_dir = snakemake.params.read_dir
 args.meta = snakemake.params.meta
-args.project_id = snakemake.params.project_id
+args.project_title = snakemake.params.project_id
 args.baseline = snakemake.params.baseline
 args.linear_model = snakemake.params.linear_model
 
@@ -312,6 +312,14 @@ args.meta_viz = "{}".format(meta_viz)
 
 gtf_file = snakemake.params.gtf_file
 args.gtf_file = "{}".format(gtf_file)
+
+if args.code_dir == 'default':
+    code_dir = '/home/groups/CEDAR/roskamsh/tools/omic_resources/'
+    args.code_dir = "{}".format(code_dir)
+else:
+    code_dir = snakemake.params.code_dir
+    args.code_dir = "{}".format(code_dir)
+
 
 args.counts = snakemake.input.counts
 

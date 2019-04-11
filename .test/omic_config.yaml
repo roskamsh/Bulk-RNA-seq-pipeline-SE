@@ -31,7 +31,9 @@ conf:
 # Paths to various tools which are used in this pipeline
 star_tool:
   STAR
-
+# Path to omic resources repository
+code_dir:
+  /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test/resources/omic_resources/
 ##########################################
 # Important project-specific paths/files
 ##########################################

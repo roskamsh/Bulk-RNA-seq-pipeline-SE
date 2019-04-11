@@ -72,7 +72,7 @@ rule generate_qc_qa:
 
 rule run_qc_qa:
     input:
-        rules.generate_qc_qa.output
+        "analysis_code/{project_id}_analysis.R".format(project_id=project_id)
     output:
         "results/tables/{project_id}_Normed_with_Ratio_and_Abundance.txt".format(project_id=config['project_id'])
     conda:

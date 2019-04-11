@@ -43,7 +43,7 @@ omic_meta_data:
   data/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
-  .
+  /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
@@ -85,11 +85,11 @@ meta_columns_to_plot:
 diffexp:
   # contrasts for the deseq2 results method
   contrasts:
-    siKLF4-vs-WT:
-      - siKLF4
+    siKD-vs-WT:
+      - siKD
       - WT
   LRT:
-    - siKLF4
+    - siKD
     - WT
 
 # The column name in your omic_meta_data file to colour your PCA plot by

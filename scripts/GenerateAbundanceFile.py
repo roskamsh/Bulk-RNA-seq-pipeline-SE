@@ -203,7 +203,7 @@ optabundancegroup.add_argument("-lj", "--launch_job",
 optabundancegroup.add_argument("-df", "--load_table",
                         action = "store_true",
                         help = "Loads appropriate abundance model to read in matrices",
-                        default = False)
+                        default = True)
 optabundancegroup.add_argument("-ds", "--deseq",
                         action = "store_true",
                         help = "Loads appropriate abundance model to read in matrices with deseq",
@@ -321,7 +321,7 @@ else:
     args.code_dir = "{}".format(code_dir)
 
 
-args.counts = snakemake.input.counts
+args.data_file_path = snakemake.input.counts
 
 print(args)
 

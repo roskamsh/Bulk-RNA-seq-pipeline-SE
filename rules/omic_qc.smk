@@ -62,6 +62,7 @@ rule generate_qc_qa:
     linear_model = config["linear_model"],
     sample_id = config["sample_id"],
     gtf_file = config["gtf_file"],
+    code_dir = config["code_dir"],
     meta_viz = format_plot_columns(),
  output:
     "analysis_code/{project_id}_analysis.R".format(project_id=project_id)

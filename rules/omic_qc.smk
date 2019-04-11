@@ -78,4 +78,4 @@ rule run_qc_qa:
     conda:
         "../envs/omic_qc_wf.yaml"
     shell:
-        "Rscript ../analysis_code/{project_id}_analysis.R".format(project_id=config['project_id'])
+        "Rscript analysis_code/{project_id}_analysis.R".format(project_id=config['project_id'])

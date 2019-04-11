@@ -4,10 +4,10 @@
 
 # GTF file for the genome build you would like to use
 gtf_file:
-  resources/chr21.gtf
+  /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test/resources/chr21.gtf
 # Bed file for rseqc function read_distribution
 bed_file:
-  resources/chr21.bed
+  /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test/resources/chr21.bed
 # Pre-built star indexes for hg38
 star_index:
   resources/
@@ -40,7 +40,7 @@ code_dir:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  data/metadata.txt
+  /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test/data/metadata.txt
 # Path to your base directory (path to this directory)
 base_dir:
   /home/travis/build/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/.test

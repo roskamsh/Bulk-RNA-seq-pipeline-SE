@@ -96,7 +96,7 @@ def generate_abundance_script(read_dir, meta_file, code_dir, tax_id, gtf_file, p
         code_context['ann_colplotme'] = '{}'.format(ann_colplotme)
         code_context['annCollm_by'] = '"{}"'.format(lm_by)
         code_context['oneclass'] = '"{}"'.format(lm_by)
-
+        print(code_context)
     else:
 
         if len(covariate.split(',')) != len(baseline.split(',')):

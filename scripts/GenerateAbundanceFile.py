@@ -313,5 +313,5 @@ print(args)
 generate_abundance_script(args.read_dir, args.meta_file, args.code_dir, args.tax_id, args.gtf_file,
                       args.project_title, args.baseline, args.sample_id, args.mart_dataset, args.lmBy,
                       args.gtf_feature, args.read_pattern, args.useme_cols, args.label_from_colname,
-                      args.path_type, args.path_norms, args.covariate, args.plot_me, args.load_table,
-                      args.data_file_path, args.deseq, args.logged_B)
+                      args.path_type, args.path_norms, args.covariate, args.plot_me,
+                      args.data_file_path, args.logged_B)

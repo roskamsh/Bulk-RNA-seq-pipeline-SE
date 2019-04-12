@@ -34,7 +34,7 @@ def generate_abundance_script(read_dir, meta_file, code_dir, tax_id, gtf_file, p
                               sample_id = "sample_id", mart_dataset = "hsapiens_gene_ensembl", lm_by = "ID_Group",
                               gtf_feature = "gene", read_pattern = "*", useme_cols = "*", label_from_colname = "*",
                               path_type = "gene.counts", path_norms = "loess", covariate = False, ann_colplotme = None,
-                              load_table = False, dataset_path = None, deseq = False, logged_b = 'F'):
+                              dataset_path = None, logged_b = 'F'):
     """Generate QC -omics dataset Rscript
 
     Args:
@@ -52,9 +52,7 @@ def generate_abundance_script(read_dir, meta_file, code_dir, tax_id, gtf_file, p
         path_norms (str): Normalization technique implemented
         covariate (bool): Boolean to implement covariates in model
         ann_colplotme (NoneType|str): defaults to {lm_by} or specified as str of format "c('column[i]','column[i+1]')"
-        load_table (bool): Boolean to load dataset matrix [n_features, n_samples]
         dataset_path (str): Absolute path to dataset matrix
-        deseq (bool): Boolean to generate DESeq2 fitted values to be plotted in QC/QA analysis
         logged_b (bool): Boolean to log2 scale data before processing
         path_type (str): STAR counts to quantify - defaults to gene.counts
         label_from_colname (str): regex expression to identify samples to perform QC/QA analysis on
@@ -93,7 +91,7 @@ def generate_abundance_script(read_dir, meta_file, code_dir, tax_id, gtf_file, p
         lm_expr = "y ~ {lm_by}".format(**code_context)
         code_context['lm_expr'] = lm_expr
         code_context['contr_ls'] = contrast_str
-        code_context['ann_colplotme'] = '{}'.format(ann_colplotme)
+        code_context['ann_colplotme'] = '"{}"'.format(ann_colplotme)
         code_context['annCollm_by'] = '"{}"'.format(lm_by)
         code_context['oneclass'] = '"{}"'.format(lm_by)
         print(code_context)
@@ -136,13 +134,8 @@ def generate_abundance_script(read_dir, meta_file, code_dir, tax_id, gtf_file, p
             code_context['ann_colplotme'] = 'c({})'.format(reformat_covariate)
             code_context['annCollm_by'] = 'c({})'.format(reformat_covariate)
 
-    if not load_table:
-        code = qc_model
-    else:
-        if deseq:
-            code = qc_matrix_w_deseq_model
-        else:
-            code = qc_matrix_model
+
+    code = qc_matrix_model
     reformatted_code = textwrap.dedent(code).strip()
     out_f.write(reformatted_code.format(**code_context))
     out_f.close()
@@ -199,14 +192,6 @@ optabundancegroup = parser.add_argument_group('Optional Abundance script generat
 optabundancegroup.add_argument("-lj", "--launch_job",
                         action = "store_true",
                         help = "Generate SLURM submission script and launch job",
-                        default = False)
-optabundancegroup.add_argument("-df", "--load_table",
-                        action = "store_true",
-                        help = "Loads appropriate abundance model to read in matrices",
-                        default = True)
-optabundancegroup.add_argument("-ds", "--deseq",
-                        action = "store_true",
-                        help = "Loads appropriate abundance model to read in matrices with deseq",
                         default = False)
 optabundancegroup.add_argument("-c", "--code_dir",
                         type = str,

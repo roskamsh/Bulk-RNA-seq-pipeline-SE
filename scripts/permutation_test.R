@@ -57,7 +57,7 @@ start_group = c(One_vector, Two_vector)
 cutoff=0.01
 number_of_diff_genes=c()
 group_list = list()
-number_of_try = 500
+number_of_try = 10
 
 for (i in 1:number_of_try)
 {

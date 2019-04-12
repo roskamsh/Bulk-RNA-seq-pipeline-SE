@@ -91,7 +91,7 @@ def generate_abundance_script(read_dir, meta_file, code_dir, tax_id, gtf_file, p
         lm_expr = "y ~ {lm_by}".format(**code_context)
         code_context['lm_expr'] = lm_expr
         code_context['contr_ls'] = contrast_str
-        code_context['ann_colplotme'] = '"{}"'.format(ann_colplotme)
+        code_context['ann_colplotme'] = '{}'.format(ann_colplotme)
         code_context['annCollm_by'] = '"{}"'.format(lm_by)
         code_context['oneclass'] = '"{}"'.format(lm_by)
         print(code_context)
@@ -293,7 +293,7 @@ sample_id = snakemake.params.sample_id
 args.sample_id = "{}".format(sample_id)
 
 meta_viz = snakemake.params.meta_viz
-args.meta_viz = "{}".format(meta_viz)
+args.plot_me = "{}".format(meta_viz)
 
 gtf_file = snakemake.params.gtf_file
 args.gtf_file = "{}".format(gtf_file)

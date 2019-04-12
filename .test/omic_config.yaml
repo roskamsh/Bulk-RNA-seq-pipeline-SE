@@ -79,6 +79,8 @@ sample_id:
 # The column names in your omic_meta_data file which you would like to annotate your heatmaps by. This is used as a QC to look for batch effects. Enter columns which could potentially introduce a batch effect in your data.
 meta_columns_to_plot:
   Condition: Condition
+  KnockDown: KnockDown
+  Treatment: Treatment
 # Contrasts which you would like to run differential expression on.
 # For example if you want to look at wild type (wt) vs. mutant (mut), you would specify mut-vs-wt
 # It is important that when listing your types here, you write your baseline SECOND

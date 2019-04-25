@@ -3,7 +3,7 @@ library(ggplot2)
 library(reshape2)
 library(data.table)
 library(plyr)
-library(RcolorBrewer)
+library(RColorBrewer)
 
 
 rld <- snakemake@input[['rld']]

@@ -104,8 +104,16 @@ diffexp:
     - siKLF4
     - siKLF4_E2
     - WT
+
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:
   labels:
   # columns of sample sheet to use for PCA
     - Condition
+
+colors:
+  rcolorbrewer:
+    - NA
+  discrete:
+    - NA
+

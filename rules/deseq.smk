@@ -65,6 +65,35 @@ rule deseq2_group:
         "../scripts/deseq2_group.R"
 
 
+rule deseq2_qplot:
+    input:
+        stats_table="results/diffexp/pairwise/{contrast}.diffexp.tsv",
+    output:
+        qplot="results/diffexp/pairwise/{contrast}.qplot.pdf",
+        qhist="results/diffexp/pairwise/{contrast}.qhist.pdf",
+        table = "results/diffexp/pairwise/{contrast}.qvalue_diffexp.tsv"
+    params:
+        contrast=get_contrast,
+    conda:
+        "../envs/omic_qc_wf.yaml"
+    script:
+        "../scripts/qplot.R"
+
+
+rule deseq2_density:
+    input:
+        rld = "results/diffexp/group/LRT_rlog_dds.rds"
+    output:
+        density="results/diffexp/group/LRT_density_plot.pdf",
+    params:
+        linear_model = config["linear_model"],
+        project_id = config["project_id"]
+    conda:
+        "../envs/deseq2.yaml"
+    script:
+        "../scripts/density_plot.R"
+
+
 rule GO:
     input:
         degFile="results/diffexp/pairwise/{contrast}.diffexp.tsv"

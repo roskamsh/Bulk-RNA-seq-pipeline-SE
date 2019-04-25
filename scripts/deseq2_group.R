@@ -55,7 +55,7 @@ md <- read.delim(file=metadata, sep = "\t", stringsAsFactors = FALSE)
 md <- md[order(md[sampleID]),]
 
 # Read in counts table
-cts <- read.table(counts, header=TRUE, row.names=1, sep="\t")
+cts <- read.table(counts, header=TRUE, row.names=1, sep="\t", check.names=F)
 cts <- cts[,order(colnames(cts))]
 
 # Check

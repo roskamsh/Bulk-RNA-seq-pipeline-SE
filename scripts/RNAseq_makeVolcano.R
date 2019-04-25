@@ -24,6 +24,10 @@ FC <- snakemake@params[['FC']]
 
 adjp <- snakemake@params[['adjp']]
 
+upCol = 'red'
+downCol = 'blue'
+ncCol = 'grey'
+
 ## Save values of each argument
 if(!is.na(charmatch("--help",args)) || !is.na(charmatch("-h",args))){
     help()

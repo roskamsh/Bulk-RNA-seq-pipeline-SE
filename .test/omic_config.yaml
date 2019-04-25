@@ -99,3 +99,9 @@ pca:
   labels:
   # columns of sample sheet to use for PCA
     - Condition
+
+colors:
+  rcolorbrewer:
+    - NA
+  discrete:
+    - NA

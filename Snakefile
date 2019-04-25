@@ -28,7 +28,6 @@ with open('cluster.json') as json_file:
     json_dict = json.load(json_file)
 
 rule_dirs = list(json_dict.keys())
-rule_dirs.pop(rule_dirs.index('__default__'))
 
 for rule in rule_dirs:
     if not os.path.exists(os.path.join(os.getcwd(),'logs',rule)):
@@ -36,12 +35,14 @@ for rule in rule_dirs:
         os.makedirs(log_out)
         print(log_out)
 
+
 result_dirs = ['diffexp','tables']
 for rule in result_dirs:
     if not os.path.exists(os.path.join(os.getcwd(),'results',rule)):
         log_out = os.path.join(os.getcwd(), 'results', rule)
         os.makedirs(log_out)
         print(log_out)
+
 
 def message(mes):
     sys.stderr.write("|--- " + mes + "\n")

@@ -19,8 +19,8 @@ density_plot <- snakemake@output[['density']]
 cat(sprintf(c('Density plot : ', density_plot, '\n')))
 
 
-colors <- snakemake@params['colors']['rcolorbrewer']
-discrete <- snakemake@params['colors']['discrete']
+colors <- snakemake@params['colors']
+discrete <- snakemake@params['discrete']
 
 
 rld = readRDS(rld)

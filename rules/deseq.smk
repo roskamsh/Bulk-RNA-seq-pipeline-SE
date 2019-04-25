@@ -87,7 +87,9 @@ rule deseq2_density:
         density="results/diffexp/group/LRT_density_plot.pdf",
     params:
         linear_model = config["linear_model"],
-        project_id = config["project_id"]
+        project_id = config["project_id"],
+        colors = config['colors']['rcolorbrewer'],
+        discrete = config['colors']['discrete']
     conda:
         "../envs/deseq2.yaml"
     script:

@@ -49,33 +49,3 @@ rule read_GC:
         "../envs/rseqc.yaml"
     shell:
         "read_GC.py -i {input} -o rseqc/read_GC/{wildcards.sample}/{wildcards.sample}"
-
-
-rule generate_qc_qa:
- input:
-    counts = "data/{project_id}_counts.filt.txt".format(project_id=config['project_id'])
- params:
-    project_id = config["project_id"],
-    read_dir = config['base_dir'],
-    meta = config["omic_meta_data"],
-    baseline = config["baseline"],
-    linear_model = config["linear_model"],
-    sample_id = config["sample_id"],
-    gtf_file = config["gtf_file"],
-    code_dir = config["code_dir"],
-    meta_viz = format_plot_columns(),
- output:
-    "analysis_code/{project_id}_analysis.R".format(project_id=project_id)
- script:
-    "../scripts/GenerateAbundanceFile.py"
-
-
-rule run_qc_qa:
-    input:
-        "analysis_code/{project_id}_analysis.R".format(project_id=config['project_id'])
-    output:
-        "results/tables/{project_id}_Normed_with_Ratio_and_Abundance.txt".format(project_id=config['project_id'])
-    conda:
-        "../envs/omic_qc_wf.yaml"
-    shell:
-        "Rscript analysis_code/{project_id}_analysis.R".format(project_id=config['project_id'])

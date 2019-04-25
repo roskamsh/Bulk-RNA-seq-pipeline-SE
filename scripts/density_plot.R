@@ -29,10 +29,10 @@ normed_t = t(normed_values)
 meta = colData(rld)
 
 
-if(colors!=NA & discrete ==NA){
+if(colors!='NA' & discrete =='NA'){
     if(brewer.pal.info[colors]$maxcolors >= length(levels(meta[condition]))){
         pal <- colorRampPalette(brewer.pal(length(levels(meta[condition])),name=colors))
-    }else if(discrete !=NA){
+    }else if(discrete != 'NA'){
         pal <- as.vector(discrete)
     }
 }

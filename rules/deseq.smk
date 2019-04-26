@@ -64,6 +64,28 @@ rule deseq2_group:
     script:
         "../scripts/deseq2_group.R"
 
+rule deseq2_QC:
+    input:
+        rld="results/diffexp/group/LRT_rlog_dds.rds",
+        rds="results/diffexp/group/LRT_all.rds"
+    output:
+        mds_plot="results/diffexp/group/MDS_plot.pdf",
+        mds_table="results/diffexp/group/MDS_table.txt",
+        heatmap_plot="results/diffexp/group/Heatmap_all_genes.pdf",
+        sd_plot="results/diffexp/group/stdev_plot.pdf",
+        rlogCounts_plot="results/diffexp/group/rlog_counts_violinPlot.pdf",
+        rlogCounts_fac_plot="results/diffexp/group/rlog_counts_faceted_violinPlot.pdf",
+        counts_plot="results/diffexp/group/counts_violinPlot.pdf",
+        counts_fac_plot="results/diffexp/group/counts_faceted_violinPlot.pdf"
+    params:
+        sample_id = config["sample_id"],
+        linear_model = config["linear_model"],
+        colors = config['colors']['rcolorbrewer'],
+        discrete = config['colors']['discrete']
+    conda:
+        "../envs/deseq2_QC.yaml"
+    script:
+        "../scripts/QC.R"
 
 rule deseq2_qplot:
     input:

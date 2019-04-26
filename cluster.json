@@ -144,6 +144,27 @@
         "o" : "logs/deseq2_group/deseq2_group_%j.out",
         "mem" : 30000
     },
+    "deseq2_QC" :
+    {
+        "J" : "deseq2_QC",
+        "e" : "logs/deseq2_QC/deseq2_QC_%j.err",
+        "o" : "logs/deseq2_QC/deseq2_QC_%j.out",
+        "mem" : 30000
+    },
+    "deseq2_qplot" :
+    {
+        "J" : "deseq2_qplot",
+        "e" : "logs/deseq2_qplot/deseq2_qplot_%j.err",
+        "o" : "logs/deseq2_qplot/deseq2_qplot_%j.out",
+        "mem" : 30000
+    },
+    "deseq2_density" :
+    {
+        "J" : "deseq2_density",
+        "e" : "logs/deseq2_density/deseq2_density_%j.err",
+        "o" : "logs/deseq2_density/deseq2_density_%j.out",
+        "mem" : 30000
+    },
     "GO" :
     {
         "J" : "GO",

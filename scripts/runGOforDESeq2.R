@@ -1,23 +1,3 @@
-args <- commandArgs()
-
-help <- function(){
-    cat("runGOforDESeq2.R :
-- For the deseq2 output in the pipeline, run GO analysis on significant genes.
-- Currently this is compatible with genome assemblies hg19 (Ens75), hg38 (Ens89) and hg38 (Ens90)
-- Input DESEq2 table must be in .txt format
-- Color options can be hex followed by saturation ex. #FE117A60 or rcolors
-- The plot will have the same name as the degFile but with a .pdf extension.\n")
-    cat("Usage: \n")
-    cat("--degFile  : deseq2 table with log2FoldChange and pvalue [ required ]\n")
-    cat("--adjp     : FDR adjusted p-value cutoff                 [ default = 0.01 ]\n")
-    cat("--assembly : genome assembly                             [ requires ]\n")
-    cat("--FC       : fold change cutoff (not log2 transformed)   [ default = 2 ]\n")
-    cat("--printTree: option to print GOterm tree (0/1)           [ default = 0 ]\n")
-    cat("\n")
-    q()
-}
-
-
 degFile = snakemake@input[['degFile']]
 
 assembly <- snakemake@params[['assembly']]
@@ -27,29 +7,6 @@ FC <- snakemake@params[['FC']]
 adjp <- snakemake@params[['adjp']]
 
 printTree <- snakemake@params[['printTree']]
-
-## Save values of each argument
-if(!is.na(charmatch("--help",args)) || !is.na(charmatch("-h",args))){
-    help()
-}
-
-if (identical(adjp,character(0))){
-   adjp<-0.01
-}else{
-    adjp <- as.numeric(adjp)
-}
-
-if (identical(FC,character(0))){
-    FC <- 2
-} else{
-    FC <- as.numeric(FC)
-}
-
-if (identical(printTree,character(0))){
-    printTree <- 0
-} else{
-    printTree <- as.numeric(printTree)
-}
 
 library(GO.db)
 library(topGO)
@@ -63,9 +20,6 @@ library(Rgraphviz)
 print("Loading differential expressed gene table")
 print(degFile)
 
-if(grepl('rda$|RData$',degFile)){
-   deg <- get(load(file=degFile))
-}
 if(grepl('txt$|tsv$',degFile)){
     deg <- read.delim(file=degFile,header=TRUE,sep="\t")
 }

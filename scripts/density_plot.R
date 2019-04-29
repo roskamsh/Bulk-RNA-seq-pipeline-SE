@@ -33,12 +33,12 @@ normed_values = assay(rld)
 normed_t = t(normed_values)
 meta = colData(rld)
 
-if(colors!='NA' & discrete =='NA'){
-    if(brewer.pal.info[colors]$maxcolors >= length(levels(meta[[condition]]))) {
-        pal <- colorRampPalette(brewer.pal(length(levels(meta[[condition]])),name=colors))
+if(colors[[1]] !='NA' & discrete[[1]] =='NA'){
+    if(brewer.pal.info[colors[[1]],]$maxcolors >= length(levels(meta[[condition]]))) {
+        pal <- brewer.pal(length(levels(meta[[condition]])),name=colors[[1]])
     } 
-} else if(discrete != 'NA'){
-        pal <- as.vector(discrete)
+} else if(discrete[[1]] != 'NA' & length(discrete)==length(levels(meta[[condition]]))){
+        pal <- unlist(discrete)
 } else {
         pal <- gg_color_hue(length(levels(meta[[condition]])))
 }

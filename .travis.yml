@@ -21,7 +21,8 @@ install:
   - source activate snakemake
   # create STAR index (too big to live in git)
   - STAR --runMode genomeGenerate --genomeDir .test/resources --genomeFastaFiles .test/resources/GRCh38_chr21.fa
-
+  # moving test data to base directory because this path is hard coded in runGOforDESeq2.R
+  - mv .test/home .
 
 script:
   - source activate snakemake

@@ -4,13 +4,13 @@
 
 # GTF file for the genome build you would like to use
 gtf_file:
-  resources/chr21.gtf
+  /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.v27.annotation.gtf
 # Bed file for rseqc function read_distribution
 bed_file:
-  resources/chr21.bed
+  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/gencode_v27.bed
 # Pre-built star indexes for hg38
 star_index:
-  resources/
+  /home/exacloud/lustre1/CEDAR/anurpa/genomes/
 filter_anno:
   /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.geneAnno.Rdata
 
@@ -27,11 +27,6 @@ conf:
 # Paths to various tools which are used in this pipeline
 star_tool:
   /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
-# Path to omic resources repository
-# Default sets code_dir to /home/groups/CEDAR/roskamsh/tools/omic_resources/
-code_dir:
-  default
-
 
 ##########################################
 # Important project-specific paths/files
@@ -40,9 +35,6 @@ code_dir:
 # Metadata needed for differential expression analysis
 omic_meta_data:
   /path/to/metadata.txt
-# Path to your base directory (path to this directory)
-base_dir:
-  /path/to/base/directory
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
@@ -64,15 +56,12 @@ mito:
 # option to print GO term tree (0/1)
 printTree:
   1
-# fold change cutoff (not log2 transformed) for GO analysis
+# fold change cutoff (not log2 transformed) for GO analysis and volcano pot
 FC:
   2
-# FDR adjusted p-value cutoff for GO analysis
+# FDR adjusted p-value cutoff for GO analysis and volcano plot
 adjp:
   0.01
-# The "baseline" used for your differential expression analysis. Ex: Healthy, WT, etc.
-baseline:
-  WT
 # The column name of the characteristic you would like to do DE on. Example: Diagnosis, genotype, etc. This must be a column in your omic_meta_data.
 linear_model:
   Condition
@@ -111,9 +100,17 @@ pca:
   # columns of sample sheet to use for PCA
     - Condition
 
+# If you would like to colour your QC plots by an RColorBrewer palette, list that palette under the rcolorbrewer parameter, otherwise, write "NA"
+# If you would like to colour your QC plots by specific colours, please list them under the discrete category, with one colour for each bullet point
+## The discrete colours will be assigned to your Conditions (ie. linear_model) in the order that they show up in your metadata table, when it is ordered alphabetically by sample ID
+## There must be the same number of colours listed as there are Conditions
+# If no options are specified, the default ggplot2 colours are used
 colors:
   rcolorbrewer:
     - NA
   discrete:
-    - NA
+    - red
+    - blue
+    - green
+    - yellow
 

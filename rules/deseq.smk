@@ -140,11 +140,13 @@ rule volcano:
     input:
         degFile="results/diffexp/pairwise/{contrast}.diffexp.tsv"
     output:
-        "results/diffexp/pairwise/{{contrast}}.diffexp.{adjp}.VolcanoPlot.pdf".format(adjp=config["adjp"])
+        volcano_plot="results/diffexp/pairwise/{{contrast}}.diffexp.{adjp}.VolcanoPlot.pdf".format(adjp=config["adjp"])
     params:
         contrast = get_contrast,
         FC = config["FC"],
         adjp = config["adjp"]
+    conda:
+        "../envs/deseq2.yaml"
     script:
         "../scripts/RNAseq_makeVolcano.R"
 

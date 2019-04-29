@@ -1,5 +1,6 @@
 library(DESeq2)
 library(dplyr)
+library(ggplot2)
 
 # Generate subdata 
 counts <- snakemake@input[['counts']]
@@ -105,10 +106,25 @@ dds <- DESeq(dds)
 # Extract results and the number of significant genes with padj<0.01
 results = results(dds, contrast = c(Type, target, baseline), independentFiltering = FALSE,cooksCutoff = Inf)
 numSig <- sum(results$padj < cutoff, na.rm=TRUE)
+number_of_diff_genes <- as.data.frame(number_of_diff_genes)
+names(number_of_diff_genes) <- "NumDiffGenes"
+number_of_diff_genes$Actual <- numSig
+
+p <- ggplot(number_of_diff_genes, aes(x=NumDiffGenes)) +
+  geom_histogram(bins=100) +
+  geom_vline(data=number_of_diff_genes, mapping=aes(xintercept = numSig, color = "Correct Labels"), 
+             linetype="longdash", size=0.6, show.legend = T) +
+  scale_color_manual(values = "gray75", name = "Number of DE genes") +
+  ggtitle(paste(number_of_try, "Random Permutations:", baseline, "vs", target)) +
+  xlab("Number of significant genes") +
+  theme(aspect.ratio=1,
+        plot.title = element_text(hjust = 0.5),
+        legend.title = element_text(size=10, hjust = 0.5))
 
 pdf(hist)
-hist(number_of_diff_genes, col = "red", breaks = 100, main=paste(number_of_try, "Random Permutations:", baseline, "vs.", target, sep=" "), xlab="Number of genes, padj<0.01",ylim=c(0,500),xlim=c(0,max(number_of_diff_genes, numSig)))
-abline(v = numSig, col = "black", lwd = 2)
+print({
+  p
+})
 dev.off()
 
 df <- data.frame(stringsAsFactors = FALSE)

@@ -47,12 +47,12 @@ rawCounts <- counts(dds, normalized=FALSE)
 md <- as.data.frame(colData(rld))
 md$SampleID <- rownames(md)
 
-if(colors!='NA' & discrete =='NA'){
-    if (brewer.pal.info[colors]$maxcolors >= length(unique(md[[Type]]))) {
-        pal <- colorRampPalette(brewer.pal(length(unique(md[[Type]])),name=colors))
+if(colors[[1]] !='NA' & discrete[[1]] =='NA'){
+    if (brewer.pal.info[colors[[1]],]$maxcolors >= length(unique(md[[Type]]))) {
+        pal <- brewer.pal(length(unique(md[[Type]])),name=colors[[1]])
     } 
-} else if(discrete != 'NA'){
-        pal <- as.vector(discrete)
+} else if(discrete[[1]] != 'NA' & length(discrete)==length(unique(md[[Type]]))){
+        pal <- unlist(discrete)
 } else {
         pal <- gg_color_hue(length(unique(md[[Type]])))
 }

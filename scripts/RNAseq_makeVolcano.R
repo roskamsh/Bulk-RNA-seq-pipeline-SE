@@ -79,15 +79,24 @@ if ("Inf" %in% deg$log10padj) {
 
 deg$Gene <- rownames(deg)
 
-if (length(c(downGenesToLabel, upGenesToLabel))>0) {
+# Assign genes to label based on whether genes are DE or not
+if (exists("downGenesToLabel") & exists("upGenesToLabel")) {
+  genesToLabel <- c(downGenesToLabel, upGenesToLabel)
+} else if (exists("downGenesToLabel") & !exists("upGenesToLabel")) {
+  genesToLabel <- downGenesToLabel
+} else if (!exists("downGenesToLabel") & exists("upGenesToLabel")) {
+  genesToLabel <- upGenesToLabel
+}
+
+if (exists("genesToLabel")) {
   p <- ggplot(data=deg, mapping=aes(x=log2FoldChange, y=log10padj, colour=Expression)) +
     geom_vline(xintercept = c(-log2(FC),log2(FC)), linetype="dashed", colour="gray45") +
     geom_hline(yintercept = -log10(adjp), linetype="dashed", colour="gray45") +
-    geom_label_repel(aes(label=ifelse(Gene %in% c(downGenesToLabel, upGenesToLabel), as.character(Gene),'')),box.padding=0.1, point.padding=0.5, segment.color="gray70", show.legend=FALSE) +
+    geom_label_repel(aes(label=ifelse(Gene %in% genesToLabel, as.character(Gene),'')),box.padding=0.1, point.padding=0.5, segment.color="gray70", show.legend=FALSE) +
     geom_point() +
     ylab("-log10(FDR)") +
     xlab("log2(Fold Change)") +
-    ggtitle(paste(baseline, "vs", target)) +
+    ggtitle(paste(target, "vs", baseline)) +
     scale_colour_manual(values=colours) +
     theme(plot.title = element_text(hjust = 0.5, face="plain"),
           axis.title.x = element_text(size=11),
@@ -105,7 +114,7 @@ if (length(c(downGenesToLabel, upGenesToLabel))>0) {
     geom_hline(yintercept = -log10(adjp), linetype="dashed", colour="gray45") +
     ylab("-log10(FDR)") +
     xlab("log2(Fold Change)") +
-    ggtitle(paste(baseline, "vs", target)) +
+    ggtitle(paste(target, "vs", baseline)) +
     scale_colour_manual(values=colours) +
     theme(plot.title = element_text(hjust = 0.5, face="plain"),
           axis.title.x = element_text(size=11),

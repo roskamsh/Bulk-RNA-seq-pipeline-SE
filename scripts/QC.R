@@ -27,8 +27,8 @@ plot_cols <- snakemake@config[['meta_columns_to_plot']]
 subset_cols = names(plot_cols)
 
 # color palette
-colors <- snakemake@params['colors']
-discrete <- snakemake@params['discrete']
+colors <- snakemake@params[['colors']]
+discrete <- snakemake@params[['discrete']]
 
 # DESeq2 objects
 rld <- snakemake@input[['rld']]

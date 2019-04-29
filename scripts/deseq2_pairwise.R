@@ -1,6 +1,7 @@
 library("DESeq2")
 library("pheatmap")
 library("ggplot2")
+library("ggrepel")
 
 print('Setting parameters')
 
@@ -49,6 +50,14 @@ plot_cols <- snakemake@config[['meta_columns_to_plot']]
 subset_cols = names(plot_cols)
 
 contrast <- c(Type, snakemake@params[["contrast"]])
+baseline <- contrast[[3]]
+target <- contrast[[2]]
+
+upCol = "#FF9999"
+downCol = "#99CCFF"
+ncCol = "#CCCCCC"
+adjp <- 0.01
+FC <- 2
 
 parallel <- FALSE
 if (snakemake@threads > 1) {
@@ -81,9 +90,80 @@ res <- results(dds, contrast=contrast,  independentFiltering = FALSE, cooksCutof
 # shrink fold changes for lowly expressed genes
 res <- lfcShrink(dds, contrast=contrast, res=res)
 
+# MA plot - calc norm values yourself to plot with ggplot
+# MA plot is log2normalized counts (averaged across all samples) vs. log2FC
+
+# extract normalized counts to calculate values for MA plot
+norm_counts <- counts(dds, normalized=TRUE)
+
+## select up regulated genes
+forPlot <- as.data.frame(res)
+forPlot$log2Norm <- log2(rowMeans(norm_counts))
+forPlot$Gene <- rownames(forPlot)
+
+up <- forPlot$padj < adjp & forPlot$log2FoldChange > log2(FC)
+sum(up)
+
+## select down regulated genes
+down <- forPlot$padj < adjp & forPlot$log2FoldChange < -log2(FC)
+sum(down)
+
+# Grab the top 5 up and down regulated genes to label in the volcano plot
+if (sum(up)>5) {
+  temp <- forPlot[up,]
+  upGenesToLabel <- head(rownames(temp[order(-temp$log2FoldChange),], 5))
+} else if (sum(up) %in% 1:5) {
+  temp <- forPlot[up,]
+  upGenesToLabel <- rownames(temp[order(-temp$log2FoldChange),])
+}
+
+if (sum(down)>5) {
+  temp <- forPlot[down,]
+  downGenesToLabel <- head(rownames(temp[order(temp$log2FoldChange),], 5))
+} else if (sum(down) %in% 1:5) {
+  temp <- forPlot[down,]
+  downGenesToLabel <- rownames(temp[order(temp$log2FoldChange),])
+}
+
+forPlot$Expression <- ifelse(down, 'down',
+                  ifelse(up, 'up','NS'))
+forPlot$Expression <- factor(forPlot$Expression, levels=c("up","down","NS"))
+
+# Assign colours to conditions
+if (sum(up)==0) {
+  colours <- c(downCol, ncCol)
+} else if (sum(down)==0) {
+  colours <- c(upCol, ncCol)
+} else {
+  colours <- c(upCol, downCol, ncCol)
+}
+
+if (length(c(downGenesToLabel, upGenesToLabel))>0) {
+  maPlot <- ggplot(forPlot, mapping=aes(x=log2Norm, y=log2FoldChange, colour=Expression)) +
+    geom_point() +
+    geom_hline(yintercept=c(-1,1), linetype="dashed", color="black") +
+    geom_label_repel(aes(label=ifelse(Gene %in% c(downGenesToLabel, upGenesToLabel), as.character(Gene),'')),box.padding=0.1, point.padding=0.5, segment.color="gray70", show.legend=FALSE) +
+    scale_colour_manual(values=colours) +
+    ggtitle(paste(baseline, "vs", target)) +
+    xlab("log2(Normalized counts)") +
+    ylab("log2(Fold Change)") +
+    theme(plot.title = element_text(hjust=0.5))
+} else {
+  maPlot <- ggplot(forPlot, mapping=aes(x=log2Norm, y=log2FoldChange, colour=Expression)) +
+    geom_point() +
+    geom_hline(yintercept=c(-1,1), linetype="dashed", color="black") +
+    scale_colour_manual(values=colours) +
+    ggtitle(paste(baseline, "vs", target)) +
+    xlab("log2(Normalized counts)") +
+    ylab("log2(Fold Change)") +
+    theme(plot.title = element_text(hjust=0.5))
+}
+
 # MA plot
 pdf(ma_plot)
-plotMA(res, ylim=c(-2,2))
+print({
+  maPlot
+})
 dev.off()
 
 # P-histogram

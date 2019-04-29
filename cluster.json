@@ -126,7 +126,7 @@
         "J" : "deseq2_init",
         "e" : "logs/deseq2_init/deseq2_init_%j.err",
         "o" : "logs/deseq2_init/deseq2_init_%j.out",
-        "c" : 20,
+        "c" : 8,
         "mem" : 80000
     },
     "deseq2_pairwise" :
@@ -134,7 +134,7 @@
         "J" : "deseq2_pairwise",
         "e" : "logs/deseq2_pairwise/deseq2_pairwise_%j.err",
         "o" : "logs/deseq2_pairwise/deseq2_pairwise_%j.out",
-        "c" : 20,
+        "c" : 8,
         "mem":80000
     },
     "deseq2_group" :
@@ -170,7 +170,7 @@
         "J" : "GO",
         "e" : "logs/GO/GO%j.err",
         "o" : "logs/GO/GO%j.out",
-        "c" : 12,
+        "c" : 6,
         "mem" : 64000
     },
     "volcano" :

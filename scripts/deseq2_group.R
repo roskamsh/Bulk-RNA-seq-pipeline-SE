@@ -148,6 +148,8 @@ dev.off()
 saveRDS(dds, file=rds_out)
 saveRDS(rld, file=rld_out)
 
+group <- as.vector(group)
+
 # If LRT group has been specified, run the analysis for that group
 if (length(group)>0) {
   md <- read.delim(file=metadata, sep = "\t", stringsAsFactors = FALSE)

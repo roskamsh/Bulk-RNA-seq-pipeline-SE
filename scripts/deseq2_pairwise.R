@@ -138,11 +138,20 @@ if (sum(up)==0) {
   colours <- c(upCol, downCol, ncCol)
 }
 
-if (length(c(downGenesToLabel, upGenesToLabel))>0) {
+# Create vector for labelling the genes based on whether genes are DE or not
+if (exists("downGenesToLabel") & exists("upGenesToLabel")) {
+  genesToLabel <- c(downGenesToLabel, upGenesToLabel)
+} else if (exists("downGenesToLabel") & !exists("upGenesToLabel")) {
+  genesToLabel <- downGenesToLabel
+} else if (!exists("downGenesToLabel") & exists("upGenesToLabel")) {
+  genesToLabel <- upGenesToLabel
+}
+
+if (exists("genesToLabel")) {
   maPlot <- ggplot(forPlot, mapping=aes(x=log2Norm, y=log2FoldChange, colour=Expression)) +
     geom_point() +
     geom_hline(yintercept=c(-1,1), linetype="dashed", color="black") +
-    geom_label_repel(aes(label=ifelse(Gene %in% c(downGenesToLabel, upGenesToLabel), as.character(Gene),'')),box.padding=0.1, point.padding=0.5, segment.color="gray70", show.legend=FALSE) +
+    geom_label_repel(aes(label=ifelse(Gene %in% genesToLabel, as.character(Gene),'')),box.padding=0.1, point.padding=0.5, segment.color="gray70", show.legend=FALSE) +
     scale_colour_manual(values=colours) +
     ggtitle(paste(baseline, "vs", target)) +
     xlab("log2(Normalized counts)") +

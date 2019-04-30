@@ -195,17 +195,3 @@ rule run_glimma_mds:
         "../envs/glimma_env.yaml"
     script:
         "../scripts/run_glimma_mds.R"
-
-
-rule run_glimma_lrt:
-    input:
-        rds="results/diffexp/group/LRT_all.rds"
-    output:
-        ma_plot = "results/diffexp/glimma-plots/LRT_ma_plot.html",
-        volcano_plot = "results/diffexp/glimma-plots/LRT_volcano_plot.html"
-    params:
-        project_id = config["project_id"],
-    conda:
-        "../envs/glimma_env.yaml"
-    script:
-        "../scripts/run_glimma.R"

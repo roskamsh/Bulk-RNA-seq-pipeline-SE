@@ -82,8 +82,6 @@ rule all:
         expand("results/diffexp/pairwise/permutationTest/Histogram.{contrast}.Permutation.Test.pdf", contrast = config["diffexp"]["contrasts"]),
         expand(["results/diffexp/glimma-plots/{contrast}.ma_plot.html", "results/diffexp/glimma-plots/{contrast}.volcano_plot.html"],contrast = config["diffexp"]["contrasts"]),
         "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id),
-        "results/diffexp/glimma-plots/LRT_ma_plot.html",
-        "results/diffexp/glimma-plots/LRT_volcano_plot.html"
 
 
 include: "rules/align_rmdp.smk"

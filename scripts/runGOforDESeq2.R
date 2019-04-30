@@ -140,13 +140,19 @@ if(!(file.exists(Dir))) {
       dir.create(Dir,FALSE,TRUE)
 }
 
+
+if (up.setsize >= 2){
+
 print("make GO table for the up genes")
-
 go.UP.BP <- runGO(geneList=up.geneList,xx=xx,otype="BP",setName=paste(basename(comparison),"upFC",FC, "adjp", adjp, sep="."))
-
-print("make the png for the up genes")
 drawBarplot(go=go.UP.BP,ontology="BP",setName=paste(basename(comparison),"upFC",FC, "adjp", adjp, sep="."))
-    
+
+}else{
+up_out = snakemake@output[[1]]
+pdf(up_out)
+dev.off()
+}
+
 print("get down genes and make geneList")
 dn <- deg$padj < adjp & deg$log2FoldChange <= -log2(FC)
 dn <- unique(rownames(deg[dn,]))
@@ -159,8 +165,15 @@ dn.setsize <- sum(as.numeric(levels(dn.geneList))[dn.geneList])
 print("setsize for significant genes") 
 dn.setsize
 
+if(dn.setsize >= 2){
+
 print("make GO table for down genes")
 go.DN.BP <- runGO(geneList=dn.geneList,xx=xx,otype="BP",setName=paste(basename(comparison),"downFC",FC, "adjp", adjp, sep="."))
-
 print("make barplot for down genes")
 drawBarplot(go=go.DN.BP,ontology="BP",setName=paste(basename(comparison),"downFC",FC, "adjp", adjp, sep="."))
+
+}else{
+down_out = snakemake@output[[2]]
+pdf(down_out)
+dev.off()
+}

@@ -167,3 +167,45 @@ rule permutation:
         "../envs/permutation.yaml"
     script:
         "../scripts/permutation_test.R"
+
+
+rule run_glimma:
+    input:
+        rds="results/diffexp/pairwise/{contrast}_all.rds"
+    output:
+        ma_plot = "results/diffexp/glimma-plots/{contrast}.ma_plot.html",
+        volcano_plot = "results/diffexp/glimma-plots/{contrast}.volcano_plot.html",
+    params:
+        contrast = get_contrast,
+        condition = config["linear_model"],
+    conda:
+        "../envs/glimma_env.yaml"
+    script:
+        "../scripts/run_glimma.R"
+
+
+rule run_glimma_mds:
+    input:
+        rds="results/diffexp/group/LRT_all.rds"
+    output:
+        mds_plot = "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id),
+    params:
+        project_id = config["project_id"],
+    conda:
+        "../envs/glimma_env.yaml"
+    script:
+        "../scripts/run_glimma_mds.R"
+
+
+rule run_glimma_lrt:
+    input:
+        rds="results/diffexp/group/LRT_all.rds"
+    output:
+        ma_plot = "results/diffexp/glimma-plots/LRT_ma_plot.html",
+        volcano_plot = "results/diffexp/glimma-plots/LRT_volcano_plot.html"
+    params:
+        project_id = config["project_id"],
+    conda:
+        "../envs/glimma_env.yaml"
+    script:
+        "../scripts/run_glimma.R"

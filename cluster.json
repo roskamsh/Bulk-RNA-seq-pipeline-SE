@@ -106,21 +106,6 @@
         "c" : 1,
         "mem":10000
     },
-    "generate_qc_qa" :
-    {
-        "J" : "qc_qa_script_generation",
-        "e" : "logs/generate_qc_qa/generate_qc_qa_%j.err",
-        "o" : "logs/generate_qc_qa/generate_qc_qa_%j.out",
-        "c" : 1,
-        "mem" : 5000
-    },
-    "run_qc_qa" :
-    {
-        "J" : "run_qc_qa",
-        "e" : "logs/run_qc_qa/run_qc_qa_%j.err",
-        "o" : "logs/run_qc_qa/run_qc_qa_%j.out",
-        "mem" : 45000
-    },
     "deseq2_init" :
     {
         "J" : "deseq2_init",

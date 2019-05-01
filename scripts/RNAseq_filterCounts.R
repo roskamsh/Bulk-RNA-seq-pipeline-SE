@@ -1,5 +1,3 @@
-args <- commandArgs()
-
 annoFile = snakemake@params[['anno']]
 
 biotypes <- snakemake@params[['biotypes']]

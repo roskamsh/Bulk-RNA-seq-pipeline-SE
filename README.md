@@ -1,18 +1,14 @@
-![Snakemake](https://img.shields.io/badge/snakemake-≥5.2.1-brightgreen.svg) [![Build Status](https://travis-ci.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE.svg?branch=master)](https://travis-ci.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE)
+# Co-culture Bulk RNA-sequencing pipeline SE
 
-# Bulk-RNA-seq-pipeline-SE
+Pipeline to run basic RNA-seq analysis on single-end data, which was performed in a xenograft mouse model, and incorporates filtering out of contaminating mouse reads.
 
-Pipeline to run basic RNA-seq analysis on single-end data.
-
-This is a package of Python and R scripts that enable reading, processing and analysis of Omics' datasets. 
 This package implements the Snakemake management workflow system and is currently implemented to work with 
 the cluster management and job scheduling system SLURM. This snakemake workflow utilizes conda installations to download and use packages for further analysis, so please ensure that you have installed miniconda prior to use.
 
 Questions/issues
 ======================
 
-Please add an issue to the Omics-QC-pipeline repository. We would appreciate if your issue included sample code/files 
-(as appropriate) so that we can reproduce your bug/issue. 
+Please add an issue to the Co-culture-Bulk-RNA-seq-pipeline repository. We would appreciate if your issue included sample code/files (as appropriate) so that we can reproduce your bug/issue. 
 
 
 Contributing
@@ -112,7 +108,4 @@ To see how the job is running, look at your queue.
 $ squeue -u your_username
 ```
 
-Directed Acyclic Graph (DAG) of an example workflow including two samples
-======================
-![Example Workflow](https://github.com/ohsu-cedar-comp-hub/Bulk-RNA-seq-pipeline-SE/blob/master/data/dag.png)
 

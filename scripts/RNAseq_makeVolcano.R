@@ -1,7 +1,5 @@
 library(ggplot2)
 library(ggrepel)
-library(cowplot)
-library(gridExtra)
 
 degFile = snakemake@input[['degFile']]
 

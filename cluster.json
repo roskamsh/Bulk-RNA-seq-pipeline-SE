@@ -34,11 +34,19 @@
         "c" : 6,
         "mem":40000
     },
-    "STAR" :
+    "star_graft" :
     {
-        "J" : "STAR",
-        "e" : "logs/STAR/STAR%j.err",
-        "o" : "logs/STAR/STAR%j.out",
+        "J" : "star_graft",
+        "e" : "logs/star_graft/star_graft%j.err",
+        "o" : "logs/star_graft/star_graft%j.out",
+        "c" : 12,
+        "mem" : 64000
+    },
+    "star_host" :
+    {
+        "J" : "star_host",
+        "e" : "logs/star_host/star_host%j.err",
+        "o" : "logs/star_host/star_host%j.out",
         "c" : 12,
         "mem" : 64000
     },
@@ -50,21 +58,45 @@
         "c" : 1,
         "mem" : 45000
     },
-    "star_statistics" :
+    "star_statistics_graft" :
     {
-        "J" : "star_statistics",
-        "e" : "logs/star_statistics/star_statistics_%j.err",
-        "o" : "logs/star_statistics/star_statistics_%j.out",
+        "J" : "star_statistics_graft",
+        "e" : "logs/star_statistics_graft/star_statistics_graft_%j.err",
+        "o" : "logs/star_statistics_graft/star_statistics_graft_%j.out",
         "c" : 1,
         "mem":5000
     },
-    "compile_star_counts" :
+    "star_statistics_host" :
     {
-        "J" : "compile_star_counts",
-        "e" : "logs/compile_star_counts/compile_star_counts_%j.err",
-        "o" : "logs/compile_star_counts/compile_star_counts_%j.out",
+        "J" : "star_statistics_host",
+        "e" : "logs/star_statistics_host/star_statistics_host_%j.err",
+        "o" : "logs/star_statistics_host/star_statistics_host_%j.out",
         "c" : 1,
-        "mem":10000
+        "mem":5000
+    },
+    "xeno" :
+    {
+        "J" : "xeno",
+        "e" : "logs/xeno/xeno_%j.err",
+        "o" : "logs/xeno/xeno_%j.out",
+        "c" : 6,
+        "mem" : 54000
+    },
+    "genecount" :
+    {
+        "J" : "genecount",
+        "e" : "logs/genecount/genecount_%j.err",
+        "o" : "logs/genecount/genecount_%j.out",
+        "c" : 1,
+        "mem" : 54000
+    },
+    "compile_counts" :
+    {
+        "J" : "compile_counts",
+        "e" : "logs/compile_counts/compile_counts_%j.err",
+        "o" : "logs/compile_counts/compile_counts_%j.out",
+        "c" : 1,
+        "mem":5000
     },
     "filter_counts" :
     {
@@ -173,6 +205,21 @@
         "o" : "logs/permutation/permutation%j.out",
         "c" : 12,
         "mem" : 80000
+    },
+    "run_glimma" :
+    {
+        "J" : "run_glimma",
+        "e" : "logs/run_glimma/run_glimma%j.err",
+        "o" : "logs/run_glimma/run_glimma_%j.out",
+        "c" : 1,
+        "mem" : 10000
+    },
+    "run_glimma_mds" :
+    {
+        "J" : "run_glimma_mds",
+        "e" : "logs/run_glimma_mds/run_glimma_mds%j.err",
+        "o" : "logs/run_glimma_mds/run_glimma_mds%j.out",
+        "c" : 1,
+        "mem" : 10000
     }
-
 }

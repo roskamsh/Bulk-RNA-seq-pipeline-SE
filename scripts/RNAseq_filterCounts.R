@@ -15,6 +15,7 @@ print(countsFile)
 ## must be a tsv or txt tab sep file
 
 counts <- read.delim(file=countsFile)
+colnames(counts)[1] <- "Genes"
 
 ##----------load anno------------#
 print("Loading annotation table")
@@ -25,7 +26,7 @@ anno <- get(load(file=annoFile))
 
 if(strsplit(biotypes, split='\\,')[[1]]!=""){
     anno.sub <- anno[paste(anno$gene_biotype) %in% strsplit(biotypes, split='\\,')[[1]] ,]
-    counts.sub <- counts[paste(counts$Genes) %in% unique(paste(anno.sub$external_gene_name)) , ]
+    counts.sub <- counts[paste(counts$Genes) %in% unique(paste(anno.sub$ensembl_gene_id)) , ]
 }else{
     print("no biotypes provided")
     counts.sub <- counts

@@ -182,7 +182,7 @@ save_pheatmap_pdf(hm, heatmap_out)
 # use plotMA function from limma, then extract data from this variable to plot with ggplot2
 p <- plotMDS(assay(rld), top = 1000)
 df <- data.frame(x=p$x, y=p$y, name=names(p$x))
-iv <- match(df$name, md[[sampleID]])
+iv <- match(df$name, md$SampleID)
 df$Condition <- paste(md[iv,][[Type]])
 
 pdf(MDS_out)

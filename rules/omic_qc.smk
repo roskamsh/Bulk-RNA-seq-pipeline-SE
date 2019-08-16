@@ -1,7 +1,7 @@
 
 rule insertion_profile:
     input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
+        "samples/xeno/{sample}/Filtered_bams/Aligned.sortedByCoord.out_Filtered.bam"
     output:
         "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.r",
         "rseqc/insertion_profile/{sample}/{sample}.insertion_profile.pdf",
@@ -14,7 +14,7 @@ rule insertion_profile:
 
 rule clipping_profile:
     input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
+        "samples/xeno/{sample}/Filtered_bams/Aligned.sortedByCoord.out_Filtered.bam"
     output:
         "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.r",
         "rseqc/clipping_profile/{sample}/{sample}.clipping_profile.pdf",
@@ -25,22 +25,22 @@ rule clipping_profile:
         "clipping_profile.py -i {input} -s SE -o rseqc/clipping_profile/{wildcards.sample}/{wildcards.sample}"
 
 
-rule read_distribution:
-    input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
-    params:
-        bed=config['bed_file']
-    output:
-        "rseqc/read_distribution/{sample}/{sample}.read_distribution.txt",
-    conda:
-        "../envs/rseqc.yaml"
-    shell:
-        "read_distribution.py -i {input} -r {params.bed} > {output}"
+#rule read_distribution:
+#    input:
+#        "samples/xeno/{sample}/Filtered_bams/Aligned.sortedByCoord.out_Filtered.bam"
+#    params:
+#        bed=config['bed_file']
+#    output:
+#        "rseqc/read_distribution/{sample}/{sample}.read_distribution.txt",
+#    conda:
+#        "../envs/rseqc.yaml"
+#    shell:
+#        "read_distribution.py -i {input} -r {params.bed} > {output}"
 
 
 rule read_GC:
     input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
+        "samples/xeno/{sample}/Filtered_bams/Aligned.sortedByCoord.out_Filtered.bam"
     output:
         "rseqc/read_GC/{sample}/{sample}.GC.xls",
         "rseqc/read_GC/{sample}/{sample}.GC_plot.r",

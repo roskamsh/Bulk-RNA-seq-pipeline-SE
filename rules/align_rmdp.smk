@@ -42,72 +42,71 @@ rule fastqscreen:
         """fastq_screen --aligner bowtie2 --conf {params.conf} --outdir samples/fastqscreen/{wildcards.sample} {input}"""
 
 
-rule STAR:
+rule star_graft:
     input:
         "samples/trimmed/{sample}_t.fastq"
     output:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam",
-        "samples/star/{sample}_bam/ReadsPerGene.out.tab",
-        "samples/star/{sample}_bam/Log.final.out"
+        "samples/star_graft/{sample}_bam/Aligned.sortedByCoord.out.bam",
+        "samples/star_graft/{sample}_bam/ReadsPerGene.out.tab",
+        "samples/star_graft/{sample}_bam/Log.final.out"
     threads: 12
     params:
-        gtf=config["gtf_file"]
+        gtf=config["gtf_file_graft"]
 
     run:
          STAR=config["star_tool"],
-         pathToGenomeIndex = config["star_index"]
+         pathToGenomeIndex = config["star_index_graft"]
 
          shell("""
                 {STAR} --runThreadN {threads} --runMode alignReads --genomeDir {pathToGenomeIndex} \
                 --readFilesIn {input} \
-                --outFileNamePrefix samples/star/{wildcards.sample}_bam/ \
+                --outFileNamePrefix samples/star_graft/{wildcards.sample}_bam/ \
                 --sjdbGTFfile {params.gtf} --quantMode GeneCounts \
                 --sjdbGTFtagExonParentGene gene_name \
                 --outSAMtype BAM SortedByCoordinate \
-                #--readFilesCommand zcat \
+                --outSAMattributes NM \
                 --twopassMode Basic
                 """)
 
 
-rule index:
+rule star_host:
     input:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam"
+        "samples/trimmed/{sample}_t.fastq"
     output:
-        "samples/star/{sample}_bam/Aligned.sortedByCoord.out.bam.bai"
-    conda:
-        "../envs/omic_qc_wf.yaml"
-    shell:
-        """samtools index {input} {output}"""
+        "samples/star_host/{sample}_bam/Aligned.sortedByCoord.out.bam",
+        "samples/star_host/{sample}_bam/ReadsPerGene.out.tab",
+        "samples/star_host/{sample}_bam/Log.final.out"
+    threads: 12
+    params:
+        gtf=config["gtf_file_host"]
+    run:
+         STAR=config["star_tool"],
+         pathToGenomeIndex = config["star_index_host"]
+
+         shell("""
+                {STAR} --runThreadN {threads} --runMode alignReads --genomeDir {pathToGenomeIndex} \
+                --readFilesIn {input} \
+                --outFileNamePrefix samples/star_host/{wildcards.sample}_bam/ \
+                --sjdbGTFfile {params.gtf} --quantMode GeneCounts \
+                --sjdbGTFtagExonParentGene gene_name \
+                --outSAMtype BAM SortedByCoordinate \
+                --outSAMattributes NM \
+                --twopassMode Basic
+                """)
 
 
-rule star_statistics:
+rule star_statistics_graft:
     input:
-        expand("samples/star/{sample}_bam/Log.final.out",sample=SAMPLES)
+        expand("samples/star_graft/{sample}_bam/Log.final.out",sample=SAMPLES)
     output:
-        "results/tables/{project_id}_STAR_mapping_statistics.txt".format(project_id = config["project_id"])
+        "results/tables/{project_id}_graft_STAR_mapping_statistics.txt".format(project_id = config["project_id"])
     script:
         "../scripts/compile_star_log.py"
 
-
-rule compile_star_counts:
+rule star_statistics_host:
     input:
-        expand("samples/star/{sample}_bam/ReadsPerGene.out.tab",sample=SAMPLES)
-    params:
-        samples=SAMPLES
+        expand("samples/star_host/{sample}_bam/Log.final.out",sample=SAMPLES)
     output:
-        "data/{project_id}_counts.txt".format(project_id=config["project_id"])
+        "results/tables/{project_id}_host_STAR_mapping_statistics.txt".format(project_id = config["project_id"])
     script:
-        "../scripts/compile_star_counts.py"
-
-
-rule filter_counts:
-    input:
-        countsFile="data/{project_id}_counts.txt".format(project_id=config["project_id"])
-    output:
-        "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"])
-    params:
-        anno=config["filter_anno"],
-        biotypes=config["biotypes"],
-        mito=config['mito']
-    script:
-        "../scripts/RNAseq_filterCounts.R"
+        "../scripts/compile_star_log.py"

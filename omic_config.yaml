@@ -3,16 +3,20 @@
 ##############################################################################
 
 # GTF file for the genome build you would like to use
-gtf_file:
-  /home/exacloud/lustre1/CEDAR/anurpa/genomes/gencode.v27.annotation.gtf
-# Bed file for rseqc function read_distribution
+gtf_file_graft:
+  /home/groups/CEDAR/anno/gtf/hg38_ens94.chr.gtf
+gtf_file_host:
+  /home/groups/CEDAR/anno/gtf/mm10_ens96.chr.gtf
+# Bed file for rseqc function read_distribution from graft genome
 bed_file:
-  /home/exacloud/lustre1/CEDAR/roskamsh/projects/Omics-QC-pipeline/data/gencode_v27.bed
-# Pre-built star indexes for hg38
-star_index:
-  /home/exacloud/lustre1/CEDAR/anurpa/genomes/
+  /home/groups/CEDAR/anno/gtf/hg38_ens94.chr.bed
+# Pre-built star indexes for hg38 and mm10
+star_index_graft:
+  /home/groups/CEDAR/anno/indices/star/hg38/
+star_index_host:
+  /home/groups/CEDAR/anno/indices/star/mm10/
 filter_anno:
-  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_90.biomaRt.geneAnno.Rdata
+  /home/groups/CEDAR/anno/biomaRt/hg38.Ens_94.biomaRt.geneAnno.Rdata
 
 ####################################################################
 # Tool-specific files that will not change from project-to-project
@@ -27,6 +31,8 @@ conf:
 # Paths to various tools which are used in this pipeline
 star_tool:
   /home/exacloud/lustre1/CEDAR/tools/STAR/tags/2.5.3a/bin/Linux_x86_64/STAR
+XenofilterBinary:
+  data/XenofilteR_1.6.tar.gz
 
 ##########################################
 # Important project-specific paths/files
@@ -34,7 +40,7 @@ star_tool:
 
 # Metadata needed for differential expression analysis
 omic_meta_data:
-  /path/to/metadata.txt
+  /home/groups/CEDAR/roskamsh/projects/Co-culture-Bulk-RNA-seq-pipeline/data/re_sequenced_metadata.txt
 
 #############################################################################################
 # Project-specific specifications you will need to make prior to submission of the pipeline
@@ -77,22 +83,22 @@ meta_columns_to_plot:
 diffexp:
   # contrasts for the deseq2 results method
   contrasts:
-    siKLF4-vs-WT:
-      - siKLF4
-      - WT
-    siKLF4_E2-vs-WT_E2:
-      - siKLF4_E2
-      - WT_E2
-    siKLF4_E2-vs-siKLF4:
-      - siKLF4_E2
-      - siKLF4
-    WT_E2-vs-WT:
-      - WT_E2
-      - WT
+    Day00_I-vs-Day00_NI:
+      - Day00_I
+      - Day00_NI
+    Day07_I-vs-Day00_NI:
+      - Day07_I
+      - Day00_NI
+    Day14_I-vs-Day00_NI:
+      - Day14_I
+      - Day00_NI
+    Day21_I-vs-Day00_NI:
+      - Day21_I
+      - Day00_NI
+    Day28_I-vs-Day00_NI:
+      - Day28_I
+      - Day00_NI
   LRT:
-    - siKLF4
-    - siKLF4_E2
-    - WT
 
 # The column name in your omic_meta_data file to colour your PCA plot by
 pca:
@@ -107,10 +113,6 @@ pca:
 # If no options are specified, the default ggplot2 colours are used
 colors:
   rcolorbrewer:
-    - NA
+    - Paired
   discrete:
-    - red
-    - blue
-    - green
-    - yellow
-
+    - NA

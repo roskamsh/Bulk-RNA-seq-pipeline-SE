@@ -65,12 +65,10 @@ for sample in SAMPLES:
 
 rule all:
     input:
-        expand("results/tables/{project_id}_STAR_mapping_statistics.txt", project_id = config['project_id']),
-        expand("samples/fastqc/{sample}/{sample}_t_fastqc.zip", sample = SAMPLES),
-        expand("samples/fastqscreen/{sample}/{sample}_t_screen.{fastqscreen_ext}", sample=SAMPLES, fastqscreen_ext=fastqscreen_ext),
+        "data/{project_id}_counts.filt.txt".format(project_id=config["project_id"]),
         expand("rseqc/insertion_profile/{sample}/{sample}.insertion_profile.{ext}",sample=SAMPLES, ext=insertion_and_clipping_prof_ext),
         expand("rseqc/clipping_profile/{sample}/{sample}.clipping_profile.{ext}", sample = SAMPLES, ext = insertion_and_clipping_prof_ext),
-        expand("rseqc/read_distribution/{sample}/{sample}.read_distribution.{ext}", sample = SAMPLES, ext = read_dist_ext),
+        #expand("rseqc/read_distribution/{sample}/{sample}.read_distribution.{ext}", sample = SAMPLES, ext = read_dist_ext),
         expand("rseqc/read_GC/{sample}/{sample}.GC{ext}", sample = SAMPLES, ext = read_gc_ext),
         expand("results/diffexp/pairwise/{contrast}.pca_plot.pdf", contrast = config["diffexp"]["contrasts"]),
         "results/diffexp/group/LRT_pca.pdf",
@@ -84,6 +82,6 @@ rule all:
         "results/diffexp/glimma-plots/{project_id}.mds_plot.html".format(project_id=project_id),
 
 
-include: "rules/align_rmdp.smk"
+include: "rules/xeno.smk"
 include: "rules/omic_qc.smk"
 include: "rules/deseq.smk"

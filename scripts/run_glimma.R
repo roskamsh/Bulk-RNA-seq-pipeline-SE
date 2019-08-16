@@ -43,10 +43,10 @@ status_frame[status_frame$padj<0.05 & status_frame$log2FoldChange > 0 ,'status']
 title = paste(title[1],'vs',title[2],sep='-')
 
 glMDPlot(res, anno=genes, status=status_frame$status, samples=colnames(rnaseq), 
-         counts=log2(rnaseq + 0.0001), groups=groups.df$Condition, main=strsplit(res@elementMetadata$description[2],': ')[[1]][2], 
+         counts=log2(rnaseq + 0.0001), groups=groups.df[[condition]], main=strsplit(res@elementMetadata$description[2],': ')[[1]][2], 
          transform=F, side.ylab='Log2-expression',launch=FALSE,side.main='GeneID', html = mdout, path=out_path)
 
 ## Volcano plot
 glXYPlot(x=res$log2FoldChange, y=-log10(res$pvalue), xlab="logFC", ylab="logodds",path=out_path,
-         status=status_frame$status, launch=FALSE,counts=log2(rnaseq + 0.0001), groups=groups.df$Condition, anno=genes,main=strsplit(res@elementMetadata$description[2],': ')[[1]][2], html = vaout)
+         status=status_frame$status, launch=FALSE,counts=log2(rnaseq + 0.0001), groups=groups.df[[condition]], anno=genes,main=strsplit(res@elementMetadata$description[2],': ')[[1]][2], html = vaout)
 
